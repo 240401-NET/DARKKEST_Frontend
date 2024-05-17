@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 const NavBar = () => {
-    const flexBetween = "flex items-center justify-between";
+    // const flexBetween = "flex items-center justify-between";
     return (
         <nav>
         </nav>
