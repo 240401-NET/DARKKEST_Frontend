@@ -34,15 +34,15 @@ export const AuthProvider = ( {children} : Props ) => {
       }, [])
   
       const register = async (username: string, email: string,  password: string) => {
-        // await UserSignUp(username, email, password)
-        //   .then((res) => {
-        //     console.log("Auth: " + res);
-        //       //navigate('/login');
-        //     }
-        //   )
-        //   .catch((error) => console.error(error))
-        let res = await UserSignUp(username, email, password);
-        console.log("Auth: " + res);
+
+        try {
+          const res = await UserSignUp(username, email, password);
+          console.log("Auth:", res); // Log the response
+          return res;
+        } catch (error) {
+            console.error("Registration failed:", error);
+            return null;
+        }
       } 
   
       const loginUser =  async (username: string, password: string ) => {

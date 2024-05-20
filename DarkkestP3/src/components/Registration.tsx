@@ -9,7 +9,7 @@ const EMAIL_REGEX = /^.+@.+\..+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Registration = () => {
-    const {register} = useAuth();
+    const register = useAuth().register;
     const userRef = useRef() as any;
     const errRef = useRef() as any;
 
@@ -38,22 +38,22 @@ const Registration = () => {
 
     useEffect(() => {
       const result = USER_REGEX.test(user)
-      console.log(result);
-      console.log(user);
+    //   console.log(result);
+    //   console.log(user);
       setValidName(result);
     }, [user])
 
     useEffect(() => {
         const result = EMAIL_REGEX.test(email)
-        console.log(result);
-        console.log(email);
+        // console.log(result);
+        // console.log(email);
         setValidEmail(result);
       }, [email])
 
     useEffect(() => {
         const result = PWD_REGEX.test(pwd)
-        console.log(result);
-        console.log(pwd);
+        // console.log(result);
+        // console.log(pwd);
         setValidPwd(result);
         const match = (pwd === matchPwd);
         setValidMatch(match);
