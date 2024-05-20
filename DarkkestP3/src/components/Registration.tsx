@@ -49,10 +49,10 @@ const Registration = () => {
       }, [user, pwd, matchPwd])    
 
   return (
-    <section>
+    <section className="center">
         <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
         <h1>Register</h1>
-        <form>
+        <form className="registrationForm">
             <label htmlFor="username">
                 Username:
                 <span className={validName ? "valid" : "hide"}>
@@ -81,6 +81,8 @@ const Registration = () => {
                 Letter, numbersm underscores, hyphens allowed.
             </p>
         </form>
+        <img src="https://www.cameronsworld.net/img/content/2/28.gif" alt="UFO" />
+        <img src="https://i.imgur.com/6kWv7kZ.gif" alt="DBZ" />
     </section>
   )
 }
