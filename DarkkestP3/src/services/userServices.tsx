@@ -54,30 +54,26 @@ export const UserLogout = () => {
             })
         }
 
-export const UserSignUp = (
-    username: string,
-    email: string,
-    password: string,
-    ) => {
-        return fetch(BaseURL + "register", {
-          method: "POST",
-          mode: 'cors',
-          body: JSON.stringify({
+export const UserSignUp = (username: string, email: string, password: string) => {
+    fetch(BaseURL + "register", {
+        method: "POST",
+        mode: 'cors',
+        body: JSON.stringify({
             "username": username,
             "email": email,
             "password": password
-          }),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8"
-            }
-          })
-          .then (response => {
-            if(response.ok) {
-              window.alert("Signup Successful");
-              return response;
-            }
-          })
-          .catch (error =>{
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+        })
+        .then (response => {
+        if(response.ok) {
+            return response;
+        }
+        return null;
+        })
+        .catch (error =>{
             throw error;
-          })
-    }
+        })
+}

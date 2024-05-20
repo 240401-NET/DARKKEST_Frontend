@@ -6,7 +6,7 @@ interface AuthContextType {
     user: string | null,
     token: string | null,
     loginUser: (username: string, password: string) => void
-    register: (email: string, username: string, password: string) => void
+    register: (email: string, username: string, password: string) => any
     isLoggedIn: () => boolean;
     logoutUser: () => void
   }
@@ -17,7 +17,7 @@ interface AuthContextType {
       children : React.ReactNode
   }
   
-  export const AuthProvider = ( {children} : Props ) => {
+export const AuthProvider = ( {children} : Props ) => {
       const navigate = useNavigate();
       const [user , setUser] = useState<string | null>(null);
       const [token , setToken] = useState<string | null>(null)
@@ -34,13 +34,15 @@ interface AuthContextType {
       }, [])
   
       const register = async (username: string, email: string,  password: string) => {
-        await UserSignUp(email, username, password)
-          .then((res) => {
-            if (res){
-              navigate('/login');
-            }
-          })
-          .catch((error) => console.error(error))
+        // await UserSignUp(username, email, password)
+        //   .then((res) => {
+        //     console.log("Auth: " + res);
+        //       //navigate('/login');
+        //     }
+        //   )
+        //   .catch((error) => console.error(error))
+        let res = await UserSignUp(username, email, password);
+        console.log("Auth: " + res);
       } 
   
       const loginUser =  async (username: string, password: string ) => {
@@ -71,12 +73,12 @@ interface AuthContextType {
         return !!user
       }
   
-        return (
+    return (
+
+        <AuthContext.Provider value = {{ loginUser, isLoggedIn, user, token, register, logoutUser }} >
+            {isAuthenticated ? children : null}
+        </AuthContext.Provider>
+    )
+}
   
-          <AuthContext.Provider value = {{ loginUser, isLoggedIn, user, token, register, logoutUser }} >
-              {isAuthenticated ? children : null}
-          </AuthContext.Provider>
-        )
-  }
-  
-  export const useAuth = () => useContext(AuthContext)
+export const useAuth = () => useContext(AuthContext)

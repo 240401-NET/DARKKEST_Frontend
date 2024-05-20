@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext'
 import { UserSignUp } from '../services/userServices';
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-._@+]{3,23}$/;
+const EMAIL_REGEX = /^.+@.+\..+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Registration = () => {
@@ -15,6 +16,10 @@ const Registration = () => {
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
+
+    const [email, setEmail] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
+    const [emailFocus, setEmailFocus] = useState(false);
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -39,6 +44,13 @@ const Registration = () => {
     }, [user])
 
     useEffect(() => {
+        const result = EMAIL_REGEX.test(email)
+        console.log(result);
+        console.log(email);
+        setValidEmail(result);
+      }, [email])
+
+    useEffect(() => {
         const result = PWD_REGEX.test(pwd)
         console.log(result);
         console.log(pwd);
@@ -61,21 +73,9 @@ const Registration = () => {
             return;
         }
 
-        let email = "abc@gmail.com"
+        let res = await register(user, email, pwd);
 
-        try
-        {
-            register(user, email, pwd);
-        }catch(e)
-        {
-            console.error(e);
-        }
-
-        // let res = await UserSignUp(user, email, pwd);
-        // console.log(res)
-        // return res;
-
-        return;
+        console.log(res);
       }
 
   return (
@@ -114,7 +114,33 @@ const Registration = () => {
                 Must begin with a letter.<br />
                 Letter, numbers, underscores, hyphens allowed.
             </p>
-            
+
+            <label htmlFor="email">
+                Email:                
+            </label>
+            <div>
+                <input
+                    type="text"
+                    id="email"
+                    autoComplete="off"
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    aria-invalid={validEmail ? "false" : "true"}
+                    aria-describedby="emailnote"
+                    onFocus={() => setEmailFocus(true)}
+                    onBlur={() => setEmailFocus(false)}
+                />
+                <span className={validEmail ? "valid" : "hide"}>
+                    <FontAwesomeIcon icon={faCheck} />
+                </span>
+                <span className={validEmail || !email ? "hide" : "invalid"}>
+                    <FontAwesomeIcon icon={faTimes} />
+                </span>
+            </div>
+            <p id="emailnote" className={emailFocus && email && !validEmail ? "instructions" : "offscreen"}>
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Proper email format eg. sample@email.com.<br />
+            </p>            
 
             <label htmlFor="password">
                 Password:
@@ -175,7 +201,7 @@ const Registration = () => {
                 <FontAwesomeIcon icon={faInfoCircle} />
                 Must match the first password input field.
             </p>
-            <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+            <button disabled={!validName || !validEmail || !validPwd || !validMatch ? true : false}>Sign Up</button>
         </form>
         {/* <img src="https://www.cameronsworld.net/img/content/2/28.gif" alt="UFO" />
         <img src="https://i.imgur.com/6kWv7kZ.gif" alt="DBZ" /> */}

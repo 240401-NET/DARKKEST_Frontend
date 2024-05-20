@@ -1,3 +1,5 @@
+import { AuthProvider } from "./context/AuthContext";
+
 //packages
 import { Routes, Route } from "react-router-dom";
 
@@ -9,9 +11,11 @@ function App() {
 
   return (
     <main className="app">
-      <Routes>
-        <Route path="/" element= { <Registration /> } />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element= { <Registration /> } />
+        </Routes>        
+      </AuthProvider>
     </main>
   )
 }
