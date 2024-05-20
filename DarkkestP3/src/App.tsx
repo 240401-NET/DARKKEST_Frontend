@@ -1,23 +1,24 @@
 import { AuthProvider } from "./context/AuthContext";
 
-//packages
+// packages
 import { Routes, Route } from "react-router-dom";
 
-//pages
+// pages
 import LandingPage from "./pages/LandingPage";
-import Registration from "./components/Registration";
+import AuthPage from "./pages/AuthPage"; // New AuthPage component
 
 function App() {
-
   return (
     <main className="app">
       <AuthProvider>
         <Routes>
-          <Route path="/" element= { <Registration /> } />
-        </Routes>        
+          <Route path="/" element={<AuthPage />} />
+          <Route path="/landing" element={<LandingPage />} />
+        </Routes>
       </AuthProvider>
     </main>
-  )
+  );
 }
 
-export default App
+export default App;
+

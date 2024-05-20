@@ -119,6 +119,32 @@ button {
     text-align: center;
 }
 
+/* index.css */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .tabs button {
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s ease;
+  }
+  
+  .tabs button.active {
+    border-bottom: 2px solid #ffffff;
+  }
+  
+  .tab-content {
+    text-align: center;
+  }
+  
+
 /*
 .center {
     position: fixed;
