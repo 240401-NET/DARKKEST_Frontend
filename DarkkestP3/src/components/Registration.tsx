@@ -9,7 +9,7 @@ const EMAIL_REGEX = /^.+@.+\..+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Registration = () => {
-    const {register} = useAuth();
+    const register = useAuth().register;
     const userRef = useRef() as any;
     const errRef = useRef() as any;
 
