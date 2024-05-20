@@ -41,8 +41,11 @@ export const AuthProvider = ( {children} : Props ) => {
         //     }
         //   )
         //   .catch((error) => console.error(error))
-        let res = await UserSignUp(username, email, password);
-        console.log("Auth: " + res);
+        UserSignUp(username, email, password)
+        .then((res) => {
+            console.log(JSON.stringify(res));
+        })
+        
       } 
   
       const loginUser =  async (username: string, password: string ) => {
