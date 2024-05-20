@@ -38,37 +38,22 @@ const Registration = () => {
 
     useEffect(() => {
       const result = USER_REGEX.test(user)
-<<<<<<< HEAD
       console.log(result);
       console.log(user);
-=======
-      //console.log(result);
-      //console.log(user);
->>>>>>> 0990aacca0bc4314a7d4e0da4b4f6c12b21e392a
       setValidName(result);
     }, [user])
 
     useEffect(() => {
         const result = EMAIL_REGEX.test(email)
-<<<<<<< HEAD
         console.log(result);
         console.log(email);
-=======
-        //console.log(result);
-        //console.log(email);
->>>>>>> 0990aacca0bc4314a7d4e0da4b4f6c12b21e392a
         setValidEmail(result);
       }, [email])
 
     useEffect(() => {
         const result = PWD_REGEX.test(pwd)
-<<<<<<< HEAD
         console.log(result);
         console.log(pwd);
-=======
-        //console.log(result);
-        //console.log(pwd);
->>>>>>> 0990aacca0bc4314a7d4e0da4b4f6c12b21e392a
         setValidPwd(result);
         const match = (pwd === matchPwd);
         setValidMatch(match);
