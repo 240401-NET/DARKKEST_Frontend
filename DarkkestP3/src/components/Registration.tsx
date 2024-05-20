@@ -32,6 +32,8 @@ const Registration = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
+    const [button, setButton] = useState(true);
+
     useEffect(() => {
       userRef.current.focus();
     }, [])
@@ -65,7 +67,8 @@ const Registration = () => {
 
       const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        setButton(false);
+        setSuccess(false);
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
         if (!v1 || !v2) {
@@ -73,8 +76,16 @@ const Registration = () => {
             return;
         }
 
-        let res = await register(user, email, pwd);
-
+        try{
+            let res = await register(user, email, pwd);
+            if(res){
+                setSuccess(true);                
+            }            
+        }catch(error){
+            console.error(error);
+        }finally{
+            setButton(true);
+        }
         //console.log(res);
       }
 
@@ -201,7 +212,7 @@ const Registration = () => {
                 <FontAwesomeIcon icon={faInfoCircle} />
                 Must match the first password input field.
             </p>
-            <button disabled={!validName || !validEmail || !validPwd || !validMatch ? true : false}>Sign Up</button>
+            <button id="signUpButton" disabled={(!validName || !validEmail || !validPwd || !validMatch) || !button ? true : false}>Sign Up</button>
         </form>
         {/* <img src="https://www.cameronsworld.net/img/content/2/28.gif" alt="UFO" />
         <img src="https://i.imgur.com/6kWv7kZ.gif" alt="DBZ" /> */}

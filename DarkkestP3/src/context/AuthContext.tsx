@@ -40,8 +40,7 @@ export const AuthProvider = ( {children} : Props ) => {
           console.log("Auth:", res); // Log the response
           return res;
         } catch (error) {
-            console.error("Registration failed:", error);
-            return null;
+            throw error;
         }
       } 
   
