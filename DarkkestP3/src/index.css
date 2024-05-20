@@ -10,3 +10,8 @@ body,
     width: 100%;
     @apply text-black;
 }
+
+.hide,
+.offscreen {
+    display: none;
+}

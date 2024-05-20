@@ -3,15 +3,16 @@ import { Routes, Route } from "react-router-dom";
 
 //pages
 import LandingPage from "./pages/LandingPage";
+import Registration from "./components/Registration";
 
 function App() {
 
   return (
-    <div className="app">
+    <main className="app">
       <Routes>
-        <Route path="/" element= { <LandingPage /> } />
+        <Route path="/" element= { <Registration /> } />
       </Routes>
-    </div>
+    </main>
   )
 }
 
