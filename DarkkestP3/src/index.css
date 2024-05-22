@@ -28,7 +28,6 @@ html {
   font-family: "Bad Script", cursive;
   font-size: 20px;
   color: #fff;
-
 }
 
 body {
@@ -61,7 +60,7 @@ section {
   background-color: rgba(0, 0, 0, 0.4);
   border: 0.5rem outset pink;
   box-shadow: 0 0 0 0.5rem skyblue;
-  border-radius: 2%
+  border-radius: 2%;
 }
 
 form {
@@ -74,7 +73,6 @@ form {
 
 input[type="text"],
 input[type="password"],
-
 input[type="email"],
 button,
 textarea {
@@ -128,7 +126,6 @@ button {
 }
 
 .errmsg {
-
   background-color: yellow;
   color: firebrick;
   font-weight: bold;
@@ -137,88 +134,92 @@ button {
 
 /* index.css */
 .tabs {
-
-    display: flex;
-    justify-content: center;
-    margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
 }
-  
+
 .tabs button {
-    padding: 10px 20px;
-    color: white;
-    cursor: pointer;
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    transition: border-bottom 0.3s ease;
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.3s ease;
 }
 
 .tabs button.active {
-    border-bottom: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
 }
 
 #homepage {
-    width: 100%;    
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 1rem;    
-    border: .5rem outset pink;
-    box-shadow: 0 0 0 .5rem skyblue;
-    border-radius: 2%;
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  border: 0.5rem outset pink;
+  box-shadow: 0 0 0 0.5rem skyblue;
+  border-radius: 2%;
 }
 
 #homeheader {
-    text-align: center;
-    font-size: 60px;
-    padding: 1rem;
+  text-align: center;
+  font-size: 60px;
+  padding: 1rem;
 }
 
 #hpaside {
-    float: left;
-    width: 25%;
-    height: 650px;
-    border: .5rem solid red;
-    text-align: center;
-    font-size: 60px;
+  float: left;
+  width: 25%;
+  height: 650px;
+  border: 0.5rem solid red;
+  text-align: center;
+  font-size: 60px;
 }
 
 #applications {
-    float: left;
-    margin-left: 2%;
-    width: 35%;
-    height: 650px;
-    border: .5rem solid red;
-    text-align: center;
-    font-size: 60px;
+  float: left;
+  margin-left: 2%;
+  width: 35%;
+  height: 650px;
+  border: 0.5rem solid red;
+  text-align: center;
+  font-size: 60px;
 }
 
 #opportunities {
-    margin-left: 64%;
-    width: 35%;
-    height: 650px;
-    border: .5rem solid red;
-    text-align: center;
-    font-size: 60px;
+  margin-left: 64%;
+  width: 35%;
+  height: 650px;
+  border: 0.5rem solid red;
+  text-align: center;
+  font-size: 60px;
 }
 
 #logoutbutton {
-    width: 100%;
-    text-align: center;
-    margin: auto;
-   
+  width: 100%;
+  text-align: center;
+  margin: auto;
 }
 
 #buttondiv {
-    position: relative;
-    width: 15%;
-    justify-content: center;
-    display: inline-block;
-    left: 30%;
-    bottom: 15px;
+  position: relative;
+  width: 15%;
+  justify-content: center;
+  display: inline-block;
+  left: 30%;
+  bottom: 15px;
 }
 
+.myButtons {
+  background-color: black;
+  margin: 20px;
+  color: white;
+}
 
-
-
+.titles {
+  font-size: 60px;
+}
