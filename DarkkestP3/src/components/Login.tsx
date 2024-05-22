@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { useAuth } from '../context/AuthContext'
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const successRef = useRef() as any;
-  
-  const {loginUser} = useAuth();
+
+  const { loginUser } = useAuth();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
