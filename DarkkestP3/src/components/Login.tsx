@@ -1,11 +1,11 @@
-
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const successRef = useRef() as any;
-  
-  const {loginUser} = useAuth();
+
+  const { loginUser } = useAuth();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -14,8 +14,6 @@ const Login = () => {
   });
   const [button, setButton] = useState(true);
   const [success, setSuccess] = useState(true);
-
-  const navigate = useNavigate();
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
