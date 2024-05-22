@@ -37,7 +37,7 @@ export const AuthProvider = ( {children} : Props ) => {
 
         try {
           const res = await UserSignUp(username, email, password);
-          console.log("Auth:", res); // Log the response
+          //console.log("Auth:", res); // Log the response
           return res;
         } catch (error) {
             throw error;
@@ -52,8 +52,7 @@ export const AuthProvider = ( {children} : Props ) => {
               localStorage.setItem("user", username);
               setToken(res.url + res.statusText);
               setUser(username!);
-              navigate('/');
-              window.alert("SignIn successful");
+              navigate('/home');
             }
           })
           .catch((error) => console.error(error))
