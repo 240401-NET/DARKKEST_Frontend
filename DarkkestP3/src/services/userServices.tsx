@@ -18,7 +18,7 @@ export const UserLogin = (username: string, password: string ) => {
             })
             .then (response => {
                 if(response.ok) {
-                    console.log("Response", response);
+                    //console.log("Response", response);
                     // window.alert("SignIn successful");
                     return response;
                 }

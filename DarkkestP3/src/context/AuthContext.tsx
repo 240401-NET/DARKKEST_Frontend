@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 interface AuthContextType {
     user: string | null,
     token: string | null,
-    loginUser: (username: string, password: string) => void
+    loginUser: (username: string, password: string) => any
     register: (email: string, username: string, password: string) => any
     isLoggedIn: () => boolean;
     logoutUser: () => void
@@ -44,18 +44,20 @@ export const AuthProvider = ( {children} : Props ) => {
         }
       } 
   
-      const loginUser =  async (username: string, password: string ) => {
-        await UserLogin(username, password)
+      const loginUser =  async (username: string, password: string) => {
+        return await UserLogin(username, password)
           .then((res) => {
             if(res){
               localStorage.setItem("token", res.url + res.statusText)
               localStorage.setItem("user", username);
               setToken(res.url + res.statusText);
               setUser(username!);
-              navigate('/home');
+              return res;
             }
           })
-          .catch((error) => console.error(error))
+          .catch((error) => {
+            console.error(error);
+          })
         }
   
       const logoutUser = () => {
