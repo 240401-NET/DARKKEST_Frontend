@@ -1,10 +1,8 @@
 import { BaseURL } from "../constants/Constant";
 
-export const UserLogin = (
-    username: string, 
-    // email: string, 
-    password: string ) => {
-        const loginURL =  BaseURL + "login";
+export const UserLogin = (username: string, password: string ) => {
+        
+    const loginURL =  BaseURL + "login";
         return fetch(loginURL, {
             method: "POST",
             mode: 'cors',
@@ -14,12 +12,13 @@ export const UserLogin = (
                     "password": password,
                 }),
             headers: {
-                "Content-type": "application/json"
-                }
+                Accept: 'application/json',
+                'Content-type': 'application/json'
+            }
             })
             .then (response => {
                 if(response.ok) {
-                    console.log("Response", response);
+                    //console.log("Response", response);
                     // window.alert("SignIn successful");
                     return response;
                 }
@@ -36,7 +35,7 @@ export const UserLogout = () => {
         return fetch(logoutURL, {
             method: "POST",
             mode: 'cors',
-            credentials: "include",
+            credentials: "same-origin",
             headers: {
                 "Content-type": "application/json"
                 },
@@ -44,8 +43,8 @@ export const UserLogout = () => {
             })
             .then (response =>{
                 if(response.ok) {
-                    // console.log("Response", response);
-                    window.alert("Logout successful");
+                    console.log("Response", response);
+                    //window.alert("Logout successful");
                 }
             })
             .catch (error => {
@@ -73,7 +72,7 @@ export const UserSignUp = async (username: string, email: string, password: stri
             throw new Error('Registration failed');
         }
 
-        return response.json(); // Return parsed JSON response
+        return response; // Return parsed JSON response
     } catch (error) {
         throw error;
     }

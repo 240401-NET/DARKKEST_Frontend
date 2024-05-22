@@ -12,6 +12,7 @@ const Registration = () => {
     const {register} = useAuth();
     const userRef = useRef() as any;
     const errRef = useRef() as any;
+    const successRef = useRef() as any;
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
@@ -78,11 +79,13 @@ const Registration = () => {
 
         try{
             let res = await register(user, email, pwd);
-            if(res){
-                setSuccess(true);                
+            if(res.ok){
+                setSuccess(true);
+                console.log("Success!!!");                
             }            
-        }catch(error){
+        }catch(error : any){
             console.error(error);
+            setErrMsg(error.message);            
         }finally{
             setButton(true);
         }
@@ -90,10 +93,11 @@ const Registration = () => {
       }
 
   return (
-    <section>        
+    <section id="loginBox">        
         <h1 style={{textAlign: "center"}}>Register</h1>
         <div style={{margin: "0.5rem"}}>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+            <p ref ={successRef} className={success ? "success" : "offscreen"} aria-live="assertive">Account Registered!</p>
         </div>
         <form onSubmit={(e) => handleSubmit(e)}>
             <label htmlFor="username">
