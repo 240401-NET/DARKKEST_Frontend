@@ -116,3 +116,26 @@ export const DeleteOpp = async (id: number) => {
     })
     return res;
 }
+
+export const GetUserOpps = async () => {
+    const url = BaseURL + "opportunity/user";
+    const res = await fetch(url, {
+        method: "GET",
+        mode: "cors",
+        credentials: "include",
+        headers: {
+            Accept: 'application/json',
+            "Content-Type": "application/json"
+        }
+    })
+    .then (response => {
+        if(response.ok) {
+            return response.json();
+        }
+    })
+    .catch (error => {
+        console.log(error);
+        throw error;
+    })
+    return res;
+}
