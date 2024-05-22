@@ -54,30 +54,25 @@ export const UserLogout = () => {
         }
 
 export const UserSignUp = async (username: string, email: string, password: string) => {
-    try {
-        const response = await fetch(BaseURL + "register", {
-            method: "POST",
-            mode: 'cors',
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            },
-            body: JSON.stringify({
-                "username": username,
-                "email": email,
-                "password": password
-            }),
-        });
+    const response = await fetch(BaseURL + "register", {
+        method: "POST",
+        mode: 'cors',
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify({
+            "username": username,
+            "email": email,
+            "password": password
+        }),
+    });
 
-        if (!response.ok) {
-            throw new Error('Registration failed');
-        }
-
-        return response; // Return parsed JSON response
-    } catch (error) {
-        throw error;
+    if (!response.ok) {
+        throw new Error('Registration failed');
     }
 
-    // let responseData = await response.json()
-    // console.log(responseData);
-    // return response;
+    return response; // Return parsed JSON response
 }
+
+
+export
