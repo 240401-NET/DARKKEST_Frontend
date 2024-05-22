@@ -12,13 +12,13 @@ const AuthPage = () => {
   return (
     <div>
       <div className="tabs">
-        <button
+        <button id="tabsbutton"
           onClick={() => handleTabClick("register")}
           className={activeTab === "register" ? "active" : ""}
         >
           Register
         </button>
-        <button
+        <button id="tabsbutton"
           onClick={() => handleTabClick("login")}
           className={activeTab === "login" ? "active" : ""}
         >
