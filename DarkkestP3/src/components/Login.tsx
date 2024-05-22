@@ -15,6 +15,7 @@ const Login = () => {
   const [button, setButton] = useState(true);
   const [success, setSuccess] = useState(true);
 
+
   const handleChange = (e : any) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
@@ -34,7 +35,7 @@ const Login = () => {
     let res = await loginUser(username, password);
 
     if(res && res.ok){
-      navigate('/home');
+      navigate('/pro');
     }
     else{
       setSuccess(false);
@@ -76,9 +77,7 @@ const Login = () => {
             onChange={handleChange} 
             //placeholder="Password" 
           />
-        </div>
-        
-        
+        </div>      
         <button disabled={!button} type="submit">Login</button>
       </form>
     </section>
