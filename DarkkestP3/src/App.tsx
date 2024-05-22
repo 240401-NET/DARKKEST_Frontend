@@ -8,7 +8,6 @@ import HomePage from "./pages/HomePage";
 import ViewOpportunitiesPage from "./pages/ViewOpportunitiesPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import CreateOpportunitiesPage from "./pages/CreateOpportunityPage.tsx";
-import EditProfileForm from "./pages/EditProfilePage.tsx";
 import NavBar from "./components/NavBar.tsx";
 import ApplicationPage from "./pages/ApplicationPage.tsx";
 
@@ -26,7 +25,6 @@ function App() {
             <Route path="/opp" element={<ViewOpportunitiesPage />} />
             <Route path="/pro" element={<ProfilePage />} />
             <Route path="/createopp" element={<CreateOpportunitiesPage />} />
-            <Route path="/edit" element={<EditProfileForm />} />
             <Route path="/app" element={<ApplicationPage />} />
             <Route path="/home" element={<HomePage />} />
           </Routes>

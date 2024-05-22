@@ -16,8 +16,13 @@ const LandingPage = () => {
           width: "570px",
           margin: "30px",
         }}
+<<<<<<< Updated upstream
       ></div>
       <div className="titles">Wecome To The Community</div>
+=======
+      >
+      </div>
+>>>>>>> Stashed changes
     </>
   );
 };
