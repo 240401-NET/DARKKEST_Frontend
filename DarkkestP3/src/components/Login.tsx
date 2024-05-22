@@ -33,6 +33,8 @@ const Login = () => {
 
     let res = await loginUser(username, password);
 
+    console.log("After await");
+
     if(res && res.ok){
       navigate('/pro');
     }
