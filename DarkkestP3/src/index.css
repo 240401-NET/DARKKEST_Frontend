@@ -1,136 +1,143 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bad+Script&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: white;
+}
+
+h1 {
+  border: 0.5rem outset rgb(242, 163, 176);
+  box-shadow: 0 0 0 0.5rem skyblue;
+  border-radius: 2%;
+  padding: 20px;
 }
 
 html {
-    /* font-family: "Comic Sans MS", "Comic Sans", cursive;
-    font-family: "Patrick Hand", cursive; */
-    font-family: "Bad Script", cursive;
-    font-size: 20px;
-    color: #fff;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-family: "Patrick Hand", cursive;
+  font-family: "Bad Script", cursive;
+  font-size: 20px;
+  color: #fff;
+
 }
 
 body {
-    min-height: 100vh;
-    background-image: url("https://www.cameronsworld.net/img/content/1/bg.png");
+  min-height: 100vh;
+  background-image: url("https://www.cameronsworld.net/img/content/1/bg.png");
 }
 
 .app {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; 
-    padding: 1rem 0.5rem;    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem 0.5rem;
 }
 
 div {
-    margin: 100px,100px,100px,100px;
+  margin: 100px, 100px, 100px, 100px;
 }
 
-#loginBox {
-    width: 100%;
-    max-width: 420px;
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 1rem;
-    background-color: rgba(0,0,0,0.4);
-    border: .5rem outset pink;
-    box-shadow: 0 0 0 .5rem skyblue;
-    border-radius: 2%;
+section {
+  width: 300px;
+  height: 700px;
+  max-width: 700px;
+  min-height: 400px;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 0.5rem outset pink;
+  box-shadow: 0 0 0 0.5rem skyblue;
+  border-radius: 2%
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex-grow: 1;
-    padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-grow: 0;
+  padding-bottom: 1rem;
 }
 
 input[type="text"],
 input[type="password"],
-input[type="username"],
+
+input[type="email"],
 button,
 textarea {
-    width: 90%;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 22px;
-    padding: 0.25rem;
-    border-radius: 1rem;
+  width: 90%;
+  /* font-family: "Courier New", Courier, monospace; */
+  font-size: 22px;
+  padding: 0.25rem;
+  border-radius: 1rem;
 }
 
 label,
 button {
-    margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 button {
-    width: auto;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: -20px;
-    padding: 0.5rem;
+  width: auto;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: -20px;
+  padding: 0.5rem;
 }
 
 .instructions {
-    font-size: 0.75rem;
-    border-radius: 0.5rem;
-    background: #000;
-    color: #fff;
-    padding: 0.25rem;
-    position: relative;
-    bottom: -10px;
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
 }
 
 .instructions > svg {
-    margin-right: 0.25rem;
+  margin-right: 0.25rem;
 }
 
 .hide,
 .offscreen {
-    display: none;
+  display: none;
 }
 
 .valid {
-    color: limegreen;
-    margin-left: 0.7rem;
+  color: limegreen;
+  margin-left: 0.7rem;
 }
 
 .invalid {
-    color: red;
-    margin-left: 0.7rem;
+  color: red;
+  margin-left: 0.7rem;
 }
 
 .errmsg {
-    background-color: yellow;
-    color: firebrick;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 1rem;
-}
 
-.success {
-    background-color: green;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 1rem;
+  background-color: yellow;
+  color: firebrick;
+  font-weight: bold;
+  text-align: center;
 }
 
 /* index.css */
 .tabs {
+
     display: flex;
     justify-content: center;
     margin-bottom: 40px;
@@ -212,43 +219,6 @@ button {
     bottom: 15px;
 }
 
-/* .tab-content {
-    text-align: center;
-} */
-  
 
-/*
-.center {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 25%;
-    text-align: center;
-    color: bisque;
-    border: 35px groove white;
-}
 
-.registrationForm {
-    margin: 3%;
-    padding: 10px;
-    border: 4px dashed yellow;
-}
-
-label {
-    display: inline;
-    text-align: left;
-    justify-content: flex-end;
-}
-  
-input {
-    height: 20px;
-    margin-left: 5px;
-}
-
-img {
-    margin: 2px;
-    display: inline;
-    border: 3px dotted green;
-} */
 
