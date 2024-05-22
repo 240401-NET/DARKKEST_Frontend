@@ -148,7 +148,7 @@ button {
     margin-bottom: 40px;
 }
   
-.tabs button {
+#tabsbutton {
     padding: 10px 20px;
     color: white;
     cursor: pointer;
