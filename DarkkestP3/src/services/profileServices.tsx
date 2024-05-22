@@ -2,10 +2,11 @@ import { BaseURL } from "../constants/Constant";
 
 //you can just paste this in the profile page, instead of importing this
 export interface UserProfile {
-    userId: string | null;
-    updatedInterests: string;
-    updatedSkills: string;
-    updatedMissionStatement: string;
+    ProfileId: number;
+    UserId: string | null;
+    Interersts: string;
+    Skills: string;
+    MissionStatement: string;
 }
 
 export const getProfile = async (): Promise<UserProfile | null> => {
