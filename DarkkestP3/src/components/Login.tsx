@@ -15,8 +15,7 @@ const Login = () => {
   const [button, setButton] = useState(true);
   const [success, setSuccess] = useState(true);
 
-
-  const handleChange = (e : any) => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
