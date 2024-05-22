@@ -13,6 +13,7 @@ const EMAIL_REGEX = /^.+@.+\..+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Registration = () => {
+
   const { register } = useAuth();
   const userRef = useRef() as any;
   const errRef = useRef() as any;
@@ -84,7 +85,7 @@ const Registration = () => {
     try {
       let res = await register(user, email, pwd);
       if (res) {
-        setSuccess(true);
+        setSuccess(true)
       }
     } catch (error) {
       console.error(error);

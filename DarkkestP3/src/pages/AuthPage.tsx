@@ -5,6 +5,7 @@ import Login from "../components/Login";
 const AuthPage = () => {
   const [activeTab, setActiveTab] = useState("register");
 
+
   const handleTabClick = (tab: React.SetStateAction<string>) => {
     setActiveTab(tab);
   };

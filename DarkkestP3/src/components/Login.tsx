@@ -1,11 +1,19 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const successRef = useRef() as any;
+  
+  const {loginUser} = useAuth();
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+  const [button, setButton] = useState(true);
+  const [success, setSuccess] = useState(true);
 
   const navigate = useNavigate();
 

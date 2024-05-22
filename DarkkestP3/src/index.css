@@ -28,6 +28,7 @@ html {
   font-family: "Bad Script", cursive;
   font-size: 20px;
   color: #fff;
+
 }
 
 body {
@@ -60,7 +61,7 @@ section {
   background-color: rgba(0, 0, 0, 0.4);
   border: 0.5rem outset pink;
   box-shadow: 0 0 0 0.5rem skyblue;
-  border-radius: 2%;
+  border-radius: 2%
 }
 
 form {
@@ -73,6 +74,7 @@ form {
 
 input[type="text"],
 input[type="password"],
+
 input[type="email"],
 button,
 textarea {
@@ -126,6 +128,7 @@ button {
 }
 
 .errmsg {
+
   background-color: yellow;
   color: firebrick;
   font-weight: bold;
@@ -134,48 +137,88 @@ button {
 
 /* index.css */
 .tabs {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
 
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+  
 .tabs button {
-  padding: 10px 20px;
-  color: white;
-  cursor: pointer;
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  transition: border-bottom 0.3s ease;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s ease;
 }
 
 .tabs button.active {
-  border-bottom: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
 }
 
-.tab-content {
-  text-align: center;
+#homepage {
+    width: 100%;    
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;    
+    border: .5rem outset pink;
+    box-shadow: 0 0 0 .5rem skyblue;
+    border-radius: 2%;
 }
 
-.registrationForm {
-  margin: 3%;
-  padding: 10px;
-  border: 4px dashed yellow;
+#homeheader {
+    text-align: center;
+    font-size: 60px;
+    padding: 1rem;
 }
 
-label {
-  display: inline;
-  text-align: left;
-  justify-content: flex-end;
+#hpaside {
+    float: left;
+    width: 25%;
+    height: 650px;
+    border: .5rem solid red;
+    text-align: center;
+    font-size: 60px;
 }
 
-input {
-  height: 20px;
-  margin-left: 5px;
+#applications {
+    float: left;
+    margin-left: 2%;
+    width: 35%;
+    height: 650px;
+    border: .5rem solid red;
+    text-align: center;
+    font-size: 60px;
 }
 
-img {
-  margin: 2px;
-  display: inline;
-  border: 3px dotted green;
+#opportunities {
+    margin-left: 64%;
+    width: 35%;
+    height: 650px;
+    border: .5rem solid red;
+    text-align: center;
+    font-size: 60px;
 }
+
+#logoutbutton {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+   
+}
+
+#buttondiv {
+    position: relative;
+    width: 15%;
+    justify-content: center;
+    display: inline-block;
+    left: 30%;
+    bottom: 15px;
+}
+
+
+
+
