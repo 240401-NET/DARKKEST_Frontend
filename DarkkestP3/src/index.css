@@ -23,8 +23,8 @@ h1 {
 }
 
 html {
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
-  font-family: "Patrick Hand", cursive;
+  /* font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-family: "Patrick Hand", cursive; */
   font-family: "Bad Script", cursive;
   font-size: 20px;
   color: #fff;
@@ -48,7 +48,7 @@ div {
   margin: 100px, 100px, 100px, 100px;
 }
 
-section {
+/* section {
   width: 300px;
   height: 700px;
   max-width: 700px;
@@ -57,6 +57,20 @@ section {
 
   flex-direction: column;
   justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 0.5rem outset pink;
+  box-shadow: 0 0 0 0.5rem skyblue;
+  border-radius: 2%;
+} */
+
+#loginBox {
+  width: 100%;
+  max-width: 420px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
   background-color: rgba(0, 0, 0, 0.4);
   border: 0.5rem outset pink;
   box-shadow: 0 0 0 0.5rem skyblue;
@@ -73,11 +87,12 @@ form {
 
 input[type="text"],
 input[type="password"],
+input[type="username"],
 input[type="email"],
 button,
 textarea {
   width: 90%;
-  /* font-family: "Courier New", Courier, monospace; */
+  font-family: "Courier New", Courier, monospace;
   font-size: 22px;
   padding: 0.25rem;
   border-radius: 1rem;
@@ -126,10 +141,23 @@ button {
 }
 
 .errmsg {
+  /* background-color: yellow;
+  color: firebrick;
+  font-weight: bold;
+  text-align: center; */
   background-color: yellow;
   color: firebrick;
   font-weight: bold;
   text-align: center;
+  border-radius: 1rem;
+}
+
+.success {
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 1rem;
 }
 
 /* index.css */
@@ -139,7 +167,20 @@ button {
   margin-bottom: 40px;
 }
 
-.tabs button {
+/* .tabs button {
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.3s ease;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+} */
+
+#tabsbutton {
   padding: 10px 20px;
   color: white;
   cursor: pointer;
