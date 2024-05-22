@@ -23,12 +23,11 @@ h1 {
 }
 
 html {
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
-  font-family: "Patrick Hand", cursive;
-  font-family: "Bad Script", cursive;
-  font-size: 20px;
-  color: #fff;
-
+    /* font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-family: "Patrick Hand", cursive; */
+    font-family: "Bad Script", cursive;
+    font-size: 20px;
+    color: #fff;
 }
 
 body {
@@ -49,19 +48,18 @@ div {
   margin: 100px, 100px, 100px, 100px;
 }
 
-section {
-  width: 300px;
-  height: 700px;
-  max-width: 700px;
-  min-height: 400px;
-  display: flex;
-
-  flex-direction: column;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.4);
-  border: 0.5rem outset pink;
-  box-shadow: 0 0 0 0.5rem skyblue;
-  border-radius: 2%
+#loginBox {
+    width: 100%;
+    max-width: 420px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.4);
+    border: .5rem outset pink;
+    box-shadow: 0 0 0 .5rem skyblue;
+    border-radius: 2%;
 }
 
 form {
@@ -74,12 +72,12 @@ form {
 
 input[type="text"],
 input[type="password"],
-
+input[type="username"],
 input[type="email"],
 button,
 textarea {
   width: 90%;
-  /* font-family: "Courier New", Courier, monospace; */
+  font-family: "Courier New", Courier, monospace; 
   font-size: 22px;
   padding: 0.25rem;
   border-radius: 1rem;
@@ -128,22 +126,29 @@ button {
 }
 
 .errmsg {
+    background-color: yellow;
+    color: firebrick;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 1rem;
+}
 
-  background-color: yellow;
-  color: firebrick;
-  font-weight: bold;
-  text-align: center;
+.success {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 1rem;
 }
 
 /* index.css */
 .tabs {
-
     display: flex;
     justify-content: center;
     margin-bottom: 40px;
 }
   
-.tabs button {
+#tabsbutton {
     padding: 10px 20px;
     color: white;
     cursor: pointer;
@@ -218,7 +223,3 @@ button {
     left: 30%;
     bottom: 15px;
 }
-
-
-
-

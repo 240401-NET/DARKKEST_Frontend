@@ -1,9 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import {
-  faCheck,
-  faTimes,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth } from "../context/AuthContext";
 import { UserSignUp } from "../services/userServices";
@@ -13,100 +9,96 @@ const EMAIL_REGEX = /^.+@.+\..+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Registration = () => {
+    const {register} = useAuth();
+    const userRef = useRef() as any;
+    const errRef = useRef() as any;
+    const successRef = useRef() as any;
 
-  const { register } = useAuth();
-  const userRef = useRef() as any;
-  const errRef = useRef() as any;
+    const [user, setUser] = useState('');
+    const [validName, setValidName] = useState(false);
+    const [userFocus, setUserFocus] = useState(false);
 
-  const [user, setUser] = useState("");
-  const [validName, setValidName] = useState(false);
-  const [userFocus, setUserFocus] = useState(false);
+    const [email, setEmail] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
+    const [emailFocus, setEmailFocus] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [validEmail, setValidEmail] = useState(false);
-  const [emailFocus, setEmailFocus] = useState(false);
+    const [pwd, setPwd] = useState('');
+    const [validPwd, setValidPwd] = useState(false);
+    const [pwdFocus, setPwdFocus] = useState(false);
 
-  const [pwd, setPwd] = useState("");
-  const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
+    const [matchPwd, setMatchPwd] = useState('');
+    const [validMatch, setValidMatch] = useState(false);
+    const [matchFocus, setMatchFocus] = useState(false);
 
-  const [matchPwd, setMatchPwd] = useState("");
-  const [validMatch, setValidMatch] = useState(false);
-  const [matchFocus, setMatchFocus] = useState(false);
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
 
-  const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+    const [button, setButton] = useState(true);
 
-  const [button, setButton] = useState(true);
+    useEffect(() => {
+      userRef.current.focus();
+    }, [])
 
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
+    useEffect(() => {
+      const result = USER_REGEX.test(user)
+      //console.log(result);
+      //console.log(user);
+      setValidName(result);
+    }, [user])
 
-  useEffect(() => {
-    const result = USER_REGEX.test(user);
-    //console.log(result);
-    //console.log(user);
-    setValidName(result);
-  }, [user]);
+    useEffect(() => {
+        const result = EMAIL_REGEX.test(email)
+        //console.log(result);
+        //console.log(email);
+        setValidEmail(result);
+      }, [email])
 
-  useEffect(() => {
-    const result = EMAIL_REGEX.test(email);
-    //console.log(result);
-    //console.log(email);
-    setValidEmail(result);
-  }, [email]);
+    useEffect(() => {
+        const result = PWD_REGEX.test(pwd)
+        //console.log(result);
+        //console.log(pwd);
+        setValidPwd(result);
+        const match = (pwd === matchPwd);
+        setValidMatch(match);
+      }, [pwd, matchPwd])
 
-  useEffect(() => {
-    const result = PWD_REGEX.test(pwd);
-    //console.log(result);
-    //console.log(pwd);
-    setValidPwd(result);
-    const match = pwd === matchPwd;
-    setValidMatch(match);
-  }, [pwd, matchPwd]);
+      useEffect(() => {
+        setErrMsg('');
+      }, [user, pwd, matchPwd])
 
-  useEffect(() => {
-    setErrMsg("");
-  }, [user, pwd, matchPwd]);
+      const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setButton(false);
+        setSuccess(false);
+        const v1 = USER_REGEX.test(user);
+        const v2 = PWD_REGEX.test(pwd);
+        if (!v1 || !v2) {
+            setErrMsg("Invalid Entry");
+            return;
+        }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setButton(false);
-    setSuccess(false);
-
-    const v1 = USER_REGEX.test(user);
-    const v2 = PWD_REGEX.test(pwd);
-    if (!v1 || !v2) {
-      setErrMsg("Invalid Entry");
-      return;
-    }
-
-    try {
-      let res = await register(user, email, pwd);
-      if (res) {
-        setSuccess(true)
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setButton(true);
-    }
-    //console.log(res);
+        try{
+            let res = await register(user, email, pwd);
+            if(res.ok){
+                setSuccess(true);
+                console.log("Success!!!");                
+            }            
+        }catch(error : any){
+            console.error(error);
+            setErrMsg(error.message);            
+        }finally{
+            setButton(true);
+        }
+        //console.log(res);  
   };
 
   return (
-    <section>
-      <h1 style={{ textAlign: "center" }}>Register</h1>
-      <div style={{ margin: "0.5rem" }}>
-        <p
-          ref={errRef}
-          className={errMsg ? "errmsg" : "offscreen"}
-          aria-live="assertive"
-        >
-          {errMsg}
-        </p>
-      </div>
+    <section id="loginBox">        
+        <h1 style={{textAlign: "center"}}>Register</h1>
+        <div style={{margin: "0.5rem"}}>
+            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+            <p ref ={successRef} className={success ? "success" : "offscreen"} aria-live="assertive">Account Registered!</p>
+        </div>
       <form onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="username">Username:</label>
         <div>
@@ -129,12 +121,7 @@ const Registration = () => {
             <FontAwesomeIcon icon={faTimes} />
           </span>
         </div>
-        <p
-          id="uidnote"
-          className={
-            userFocus && user && !validName ? "instructions" : "offscreen"
-          }
-        >
+        <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
           <FontAwesomeIcon icon={faInfoCircle} />
           4 to 24 characters.
           <br />
@@ -163,12 +150,7 @@ const Registration = () => {
             <FontAwesomeIcon icon={faTimes} />
           </span>
         </div>
-        <p
-          id="emailnote"
-          className={
-            emailFocus && email && !validEmail ? "instructions" : "offscreen"
-          }
-        >
+        <p id="emailnote" className={emailFocus && email && !validEmail ? "instructions" : "offscreen"}>
           <FontAwesomeIcon icon={faInfoCircle} />
           Proper email format eg. sample@email.com.
           <br />
@@ -193,10 +175,7 @@ const Registration = () => {
             <FontAwesomeIcon icon={faTimes} />
           </span>
         </div>
-        <p
-          id="pwdnote"
-          className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
-        >
+        <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
           <FontAwesomeIcon icon={faInfoCircle} />
           8 to 24 characters.
           <br />
@@ -231,23 +210,11 @@ const Registration = () => {
             <FontAwesomeIcon icon={faTimes} />
           </span>
         </div>
-        <p
-          id="confirmnote"
-          className={matchFocus && !validMatch ? "instructions" : "offscreen"}
-        >
+        <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
           <FontAwesomeIcon icon={faInfoCircle} />
           Must match the first password input field.
         </p>
-        <button
-          id="signUpButton"
-          disabled={
-            !validName || !validEmail || !validPwd || !validMatch || !button
-              ? true
-              : false
-          }
-        >
-          Sign Up
-        </button>
+        <button id="signUpButton" disabled={!validName || !validEmail || !validPwd || !validMatch || !button ? true : false}>Sign Up</button>
       </form>
       {/* <img src="https://www.cameronsworld.net/img/content/2/28.gif" alt="UFO" />
         <img src="https://i.imgur.com/6kWv7kZ.gif" alt="DBZ" /> */}
