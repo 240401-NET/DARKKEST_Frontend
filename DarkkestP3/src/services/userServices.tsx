@@ -73,6 +73,3 @@ export const UserSignUp = async (username: string, email: string, password: stri
 
     return response; // Return parsed JSON response
 }
-
-
-export
