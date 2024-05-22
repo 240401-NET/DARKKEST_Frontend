@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "./ProfilePage.css";
 
 const ProfilePage: React.FC = () => {
   const [profilePic, setProfilePic] = useState("");
-  const [interests, setInterests] = useState<string[]>([]);
-  const [skills, setSkills] = useState<string[]>([]);
+  const [interests, setInterests] = useState("");
+  const [skills, setSkills] = useState("");
   const [missionStatement, setMissionStatement] = useState("");
 
   const handleProfilePicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
