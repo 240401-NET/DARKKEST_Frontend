@@ -8,7 +8,7 @@ const NavBar = () => {
     <nav id="navbar" className="flexbetween">
       <ul>
         <li className="navitem">
-          <NavLink to="/">Logout</NavLink>
+          <NavLink to="/auth">Register</NavLink>
         </li>
         <li className="navitem">
           <NavLink to="/auth">Login</NavLink>

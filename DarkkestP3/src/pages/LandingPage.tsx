@@ -4,15 +4,6 @@ import Logo from "../assets/LogoD.png";
 const LandingPage = () => {
   return (
     <>
-      <div>
-        <h1>Wecome To The Community</h1>
-      </div>
-      <div>
-        <NavLink to="/auth">
-          <button>Login/Register</button>
-        </NavLink>
-      </div>
-
       <div
         className="Logo"
         style={{
@@ -20,13 +11,13 @@ const LandingPage = () => {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
-          opacity: ".8",
-          height: "500px",
-          width: "500px",
+          opacity: ".65",
+          height: "540px",
+          width: "570px",
+          margin: "30px",
         }}
-      >
-        {Logo}
-      </div>
+      ></div>
+      <div className="titles">Wecome To The Community</div>
     </>
   );
 };
