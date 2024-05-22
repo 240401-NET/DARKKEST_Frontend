@@ -1,21 +1,21 @@
 import React , {createContext, useState, useContext, useEffect} from 'react'
-import { UserSignUp, UserLogin } from '../services/userServices';
+import { UserSignUp, UserLogin, UserLogout } from '../services/userServices';
 import { useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
     user: string | null,
     token: string | null,
-    loginUser: (username: string, password: string) => void
+    loginUser: (username: string, password: string) => any
     register: (email: string, username: string, password: string) => any
     isLoggedIn: () => boolean;
     logoutUser: () => void
-  }
+}
   
-  const AuthContext = createContext<AuthContextType>({} as AuthContextType);
-  
-  interface Props {
-      children : React.ReactNode
-  }
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+
+interface Props {
+    children : React.ReactNode
+}
   
 export const AuthProvider = ( {children} : Props ) => {
       const navigate = useNavigate();
@@ -37,35 +37,37 @@ export const AuthProvider = ( {children} : Props ) => {
 
         try {
           const res = await UserSignUp(username, email, password);
-          console.log("Auth:", res); // Log the response
+          //console.log("Auth:", res); // Log the response
           return res;
         } catch (error) {
             throw error;
         }
       } 
   
-      const loginUser =  async (username: string, password: string ) => {
-        await UserLogin(username, password)
+      const loginUser =  async (username: string, password: string) => {
+        return await UserLogin(username, password)
           .then((res) => {
             if(res){
               localStorage.setItem("token", res.url + res.statusText)
               localStorage.setItem("user", username);
               setToken(res.url + res.statusText);
               setUser(username!);
-              navigate('/');
-              window.alert("SignIn successful");
+              return res;
             }
           })
-          .catch((error) => console.error(error))
+          .catch((error) => {
+            console.error(error);
+          })
         }
   
-      const logoutUser = () => {
-        // UserLogout;
+      const logoutUser = async () => {
+        await UserLogout();
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         setUser(null);
         setToken("");
-        // navigate("/login")
+        navigate("/");
+        //window.location.reload();
       }
   
       const isLoggedIn = () => {
