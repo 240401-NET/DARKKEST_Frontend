@@ -1,35 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { UserProfile, getProfile, updateUserProfile, deleteUserProfile } from "../services/profileServices";
 
 const ProfilePage: React.FC = () => {
-  const [profilePic, setProfilePic] = useState("");
+  const [userId, setUserId] = useState("");
+  const [profileId, setProfileId] = useState(0);
   const [interests, setInterests] = useState("");
   const [skills, setSkills] = useState("");
   const [missionStatement, setMissionStatement] = useState("");
+  useEffect(() => {
+    getProfile().then((profile) => {
+      if (profile) {
+        setUserId(userId);
+        setProfileId(profileId);
+        setInterests(interests);
+        setSkills(skills);
+        setMissionStatement(missionStatement);
+      }
+    })
+  }, []);
+  
 
-  const handleProfilePicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (reader.result) {
-          setProfilePic(reader.result as string);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleProfilePicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       if (reader.result) {
+  //         setProfilePic(reader.result as string);
+  //       }
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const profileData = {
-      profilePic,
-      interests,
-      skills,
-      missionStatement,
-    };
-    // Handle the profile data (e.g., send it to an API, or lift the state up to a parent component)
-    console.log(profileData);
+    const updatedProfile: UserProfile = {
+      
+    }
   };
 
   return (
@@ -45,25 +54,25 @@ const ProfilePage: React.FC = () => {
       </NavLink>
 
       <form onSubmit={handleSubmit}>
-        <label>
+        {/* <label>
           Profile Picture:
           <input type="file" onChange={handleProfilePicChange} />
           {profilePic && <img src={profilePic} alt="Profile" style={{ width: '100px', height: '100px' }} />}
-        </label>
+        </label> */}
         <label>
           Interests:
           <input
             type="text"
-            value={interests.join(", ")}
-            onChange={(e) => setInterests(e.target.value.split(", "))}
+            value={interests}
+            onChange={(e) => setInterests(e.target.value)}
           />
         </label>
         <label>
           Skills:
           <input
             type="text"
-            value={skills.join(", ")}
-            onChange={(e) => setSkills(e.target.value.split(", "))}
+            value={skills}
+            onChange={(e) => setSkills(e.target.value)}
           />
         </label>
         <label>
