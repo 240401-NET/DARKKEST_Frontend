@@ -11,6 +11,10 @@ import CreateOpportunitiesPage from "./pages/CreateOpportunityPage.tsx";
 import EditProfileForm from "./pages/EditProfilePage.tsx";
 import NavBar from "./components/NavBar.tsx";
 import ApplicationPage from "./pages/ApplicationPage.tsx";
+import { AuthProvider } from "./context/AuthContext.tsx";
+import { Route, Routes } from "react-router-dom";
+import LandingPage from "./pages/LandingPage.tsx";
+import AuthPage from "./pages/AuthPage.tsx";
 
 function App() {
   return (
