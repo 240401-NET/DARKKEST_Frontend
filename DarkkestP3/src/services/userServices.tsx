@@ -35,7 +35,7 @@ export const UserLogout = () => {
         return fetch(logoutURL, {
             method: "POST",
             mode: 'cors',
-            credentials: "include",
+            credentials: "same-origin",
             headers: {
                 "Content-type": "application/json"
                 },
@@ -43,8 +43,8 @@ export const UserLogout = () => {
             })
             .then (response =>{
                 if(response.ok) {
-                    // console.log("Response", response);
-                    window.alert("Logout successful");
+                    console.log("Response", response);
+                    //window.alert("Logout successful");
                 }
             })
             .catch (error => {

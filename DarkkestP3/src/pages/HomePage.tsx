@@ -10,12 +10,17 @@ const HomePage = () => {
       if(!isLoggedIn()) navigate("/")
     },)
 
+    const handleLogout = (e :  React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+        logoutUser();
+    }
+
     return(
         <>
             <section id="homepage">
                 <header id="homeheader">Welcome {user}
                     <div id="buttondiv">
-                        <button id="logoutbutton">Logout</button>
+                        <button id="logoutbutton" onClick={handleLogout}>Logout</button>
                     </div>
                 </header>
                 <div style={{width: "100%"}}>    

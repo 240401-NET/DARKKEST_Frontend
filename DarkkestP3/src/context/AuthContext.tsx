@@ -1,5 +1,5 @@
 import React , {createContext, useState, useContext, useEffect} from 'react'
-import { UserSignUp, UserLogin } from '../services/userServices';
+import { UserSignUp, UserLogin, UserLogout } from '../services/userServices';
 import { useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
@@ -60,13 +60,14 @@ export const AuthProvider = ( {children} : Props ) => {
           })
         }
   
-      const logoutUser = () => {
-        // UserLogout;
+      const logoutUser = async () => {
+        await UserLogout();
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         setUser(null);
         setToken("");
-        // navigate("/login")
+        navigate("/");
+        //window.location.reload();
       }
   
       const isLoggedIn = () => {
