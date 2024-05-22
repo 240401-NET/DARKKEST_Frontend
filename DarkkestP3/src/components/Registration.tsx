@@ -93,7 +93,7 @@ const Registration = () => {
       }
 
   return (
-    <section>        
+    <section id="loginBox">        
         <h1 style={{textAlign: "center"}}>Register</h1>
         <div style={{margin: "0.5rem"}}>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>

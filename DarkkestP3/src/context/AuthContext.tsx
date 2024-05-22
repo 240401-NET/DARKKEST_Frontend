@@ -9,13 +9,13 @@ interface AuthContextType {
     register: (email: string, username: string, password: string) => any
     isLoggedIn: () => boolean;
     logoutUser: () => void
-  }
+}
   
-  const AuthContext = createContext<AuthContextType>({} as AuthContextType);
-  
-  interface Props {
-      children : React.ReactNode
-  }
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+
+interface Props {
+    children : React.ReactNode
+}
   
 export const AuthProvider = ( {children} : Props ) => {
       const navigate = useNavigate();

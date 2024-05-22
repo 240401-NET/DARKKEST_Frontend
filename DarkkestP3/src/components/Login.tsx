@@ -44,7 +44,7 @@ const Login = () => {
   };
 
   return (
-    <section>
+    <section id="loginBox">
       <h1 style={{textAlign: "center"}}>Login</h1>
       <div>
         <p ref={successRef} className={!success ? "errmsg" : "offscreen"} aria-live="assertive">Login Failed!</p>
