@@ -1,9 +1,11 @@
+import { BaseURL } from "../constants/Constant";
+
 //TODO: ALL URLS HERE ARE PERPESCITVE TO BE CHANGED LATER
 
 //todo: might need to edit these depending on how our provider is handling these
 export const userLogin = async (username: string, password: string): Promise<void> => {
     //TODO: edit this
-    const url = "http://localhost:5000/login";
+    const url = BaseURL + "login";
     const res = await fetch(url, {
         method: "POST",
         mode: "cors",
@@ -25,7 +27,7 @@ export const userLogin = async (username: string, password: string): Promise<voi
 
 export const userLogout = async (): Promise<void> => {
     //TODO: edit this
-    const url = "http://localhost:5000/logout";
+    const url = BaseURL + "logout";
     const res = await fetch(url, {
         method: "POST",
         mode: "cors",
@@ -45,7 +47,7 @@ export const userLogout = async (): Promise<void> => {
 
 export const userSignup = async (email: string, username: string, password: string): Promise<void> => {
     //TODO: edit this
-    const url = "http://localhost:5000/signup";
+    const url = BaseURL + "register";
     const res = await fetch(url, {
         method: "POST",
         mode: "cors",
