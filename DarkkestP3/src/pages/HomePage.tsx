@@ -15,12 +15,18 @@ const HomePage = () => {
         logoutUser();
     }
 
+    const handleLanding = (e :  React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+        navigate("/landing");
+    }
+
     return(
         <>
             <section id="homepage">
                 <header id="homeheader">Welcome {user}
                     <div id="buttondiv">
                         <button id="logoutbutton" onClick={handleLogout}>Logout</button>
+                        <button onClick={handleLanding}>Landing</button>
                     </div>
                 </header>
                 <div style={{width: "100%"}}>    
