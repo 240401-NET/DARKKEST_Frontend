@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage.tsx";
 import CreateOpportunitiesPage from "./pages/CreateOpportunityPage.tsx";
 import NavBar from "./components/NavBar.tsx";
 import ApplicationPage from "./pages/ApplicationPage.tsx";
+import OrganizationPage from "./pages/OrganizationPage.tsx";
 import { useEffect, useState } from "react";
 import { SelectedAuthForm, SelectedPage } from "./shared/types.ts";
 import Hero from "./pages/Hero.tsx";
@@ -47,6 +48,7 @@ function App() {
           <Route path="/auth" element={<AuthPage selectedAuthForm={selectedAuthForm} setSelectedAuthForm={setSelectedAuthForm} />} />
           <Route path="/landing" element={<LandingPage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/organizations" element={<OrganizationPage />} />
           {/*
           <Route path="/opp" element={<ViewOpportunitiesPage />} />
           <Route path="/pro" element={<ProfilePage />} />
