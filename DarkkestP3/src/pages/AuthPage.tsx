@@ -1,35 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import Registration from "../components/Registration";
 import Login from "../components/Login";
+import { SelectedAuthForm } from "../shared/types";
 
-const AuthPage = () => {
-  const [activeTab, setActiveTab] = useState("register");
+type AuthPageProps = {
+  selectedAuthForm: SelectedAuthForm;
+  setSelectedAuthForm: (value: SelectedAuthForm) => void;
+}
 
-  const handleTabClick = (tab: React.SetStateAction<string>) => {
-    setActiveTab(tab);
-  };
-
+const AuthPage = ({ selectedAuthForm, setSelectedAuthForm }: AuthPageProps) => {
   return (
-    <div>
-      <div className="tabs">
-        <button id="tabsbutton"
-          onClick={() => handleTabClick("register")}
-          className={activeTab === "register" ? "active" : ""}
-        >
-          Register
-        </button>
-        <button id="tabsbutton"
-          onClick={() => handleTabClick("login")}
-          className={activeTab === "login" ? "active" : ""}
-        >
-          Login
-        </button>
-      </div>
-      <div className="tabs">
-        {activeTab === "register" && <Registration />}
-        {activeTab === "login" && <Login />}
-      </div>
-    </div>
+    <section className="flex items-center justify-center w-full min-h-screen bg-primary-white">
+      {selectedAuthForm === SelectedAuthForm.Login ? (
+        <Login setSelectedAuthForm={setSelectedAuthForm} />
+      ) : (
+        <Registration setSelectedAuthForm={setSelectedAuthForm} />
+      )}
+    </section>
   );
 };
 
