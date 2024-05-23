@@ -42,6 +42,11 @@ const LeftSideBar = () => {
           >
             Your Opportunities
           </NavLink>
+          <NavLink 
+            to="/organizations"
+            className="text-sm font-thin hover:underline hover:text-primary-green"> 
+            Organizations
+          </NavLink>
           <NavLink
             to="/current-applications"
             className="text-sm font-thin hover:underline hover:text-primary-green"
