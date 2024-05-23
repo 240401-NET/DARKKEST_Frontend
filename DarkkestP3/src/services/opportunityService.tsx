@@ -13,7 +13,7 @@ export const GetAllOpps = async () => {
     })
     .then (response => {
         if(response.ok) {
-            return response;
+            return response.json();
         }
     })
     .catch (error => {

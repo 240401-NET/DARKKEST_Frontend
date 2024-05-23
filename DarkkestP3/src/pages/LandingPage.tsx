@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { GetUserOpps, CreateOpp } from "../services/opportunityService";
+import { GetUserOpps, CreateOpp, GetAllOpps } from "../services/opportunityService";
 import LeftSideBar from "../components/LeftSideBar";
 import OpportunitiesList from "../components/OpportunitiesList";
 import OpportunityFormModal from "../components/OpportunityFormModal";
@@ -19,7 +19,7 @@ const LandingPage: React.FC = () => {
 
   useEffect(() => {
     const fetchOpportunities = async () => {
-      const res = await GetUserOpps();
+      const res = await GetAllOpps();
       if (!res) {
         throw new Error("Failed to fetch opportunities");
       }
