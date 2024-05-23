@@ -2,11 +2,11 @@ import { BaseURL } from "../constants/Constant";
 
 //you can just paste this in the profile page, instead of importing this
 export interface UserProfile {
-    ProfileId: number;
-    UserId: string | null;
-    Interersts: string;
-    Skills: string;
-    MissionStatement: string;
+    // ProfileId: number;
+    userId: string | null;
+    updatedInterests: string;
+    updatedSkills: string;
+    updatedMissionStatement: string;
 }
 
 export const getProfile = async (): Promise<UserProfile | null> => {
@@ -30,8 +30,9 @@ export const getProfile = async (): Promise<UserProfile | null> => {
     }
 }
 
-export const updateUserProfile = async (updateProfile: UserProfile): Promise<void> => {
+export const updateUserProfile = async (updateProfile: UserProfile): Promise<UserProfile | null> => {
     try {
+        console.log(updateProfile);
         const response = await fetch(BaseURL + "profile/update", {
             method: "PUT",
             mode: "cors",
@@ -45,11 +46,14 @@ export const updateUserProfile = async (updateProfile: UserProfile): Promise<voi
         if (response.ok) {
             const result = await response.json();
             console.log("Profile updated successfully:", result);
+            return result;
         } else {
             console.error("Failed to update profile:", response.status, response.statusText);
+            return null;
         }
     } catch (error) {
         console.error("Error updating profile:", error);
+        return null;
     }
 }
 

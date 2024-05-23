@@ -45,6 +45,34 @@ const Login = () => {
     return;    
   };
 
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+    
+  //   const { username, password } = form;
+  //   if (!username || !password) {
+  //       console.log("Inputs are empty!");
+  //       return;
+  //   }
+
+  //   setButton(false);
+
+  //   try {
+  //       const res = await loginUser(username, password);
+  //       if (res && res.ok) {
+  //           navigate('/pro');
+  //           console.log("Login successful!");
+  //       } else {
+  //           setSuccess(false);
+  //           console
+  //       }
+  //   } catch (error) {
+  //       console.error("Login failed:", error);
+  //       setSuccess(false);
+  //   }
+
+//     setButton(true);
+// };
+
   return (
     <section id="loginBox">
       <h1 style={{textAlign: "center"}}>Login</h1>
