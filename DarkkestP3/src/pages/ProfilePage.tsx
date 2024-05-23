@@ -19,20 +19,7 @@ const ProfilePage: React.FC = () => {
       }
     })
   }, []);
-  
 
-  // const handleProfilePicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       if (reader.result) {
-  //         setProfilePic(reader.result as string);
-  //       }
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
