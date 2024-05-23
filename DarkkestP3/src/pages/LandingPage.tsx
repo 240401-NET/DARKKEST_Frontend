@@ -16,8 +16,8 @@ const LandingPage = () => {
           width: "570px",
           margin: "30px",
         }}
-      ></div>
-      <div className="titles">Wecome To The Community</div>
+      >
+      </div>
     </>
   );
 };

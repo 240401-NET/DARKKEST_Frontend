@@ -18,13 +18,13 @@ export const UserLogin = (username: string, password: string ) => {
             })
             .then (response => {
                 if(response.ok) {
-                    //console.log("Response", response);
-                    // window.alert("SignIn successful");
+                    console.log("Response", response);
+                    window.alert("SignIn successful");
                     return response;
                 }
             })
             .catch (error => {
-                // window.alert("Signin unsuccessful. Please try again!")
+                window.alert("Signin unsuccessful. Please try again!")
                 console.log(error);
                 throw error;
             })
