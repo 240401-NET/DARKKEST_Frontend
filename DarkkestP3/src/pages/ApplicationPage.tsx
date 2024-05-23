@@ -1,6 +1,7 @@
 import React from "react";
 
 const ApplicationPage: React.FC = () => {
+  
   return (
     <div>
       {" "}
