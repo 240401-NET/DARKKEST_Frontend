@@ -5,6 +5,7 @@ import OpportunitiesList from "../components/OpportunitiesList";
 import OpportunityFormModal from "../components/OpportunityFormModal";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { CreateOpp } from "../services/opportunityService";
+import Elder from "../assets/Elder.png";
 
 function OpportunityPage() {
   interface Opportunity {
@@ -114,6 +115,12 @@ function OpportunityPage() {
             </div>
           </div>
         </div>
+
+        <div className="flex-1 bg-gray-200 p-4">
+          {/* Right sidebar content */}
+          <img src={Elder} id="ElderPic" />
+        </div>
+
         {/* Modal for creating new opportunities */}
         <OpportunityFormModal
           isOpen={isModalOpen}

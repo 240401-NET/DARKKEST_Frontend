@@ -4,6 +4,7 @@ import LeftSideBar from "../components/LeftSideBar";
 import OpportunitiesList from "../components/OpportunitiesList";
 import OpportunityFormModal from "../components/OpportunityFormModal";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { NavLink } from "react-router-dom";
 
 interface Opportunity {
   oppId: number;
@@ -102,10 +103,13 @@ const LandingPage: React.FC = () => {
             />
             <MagnifyingGlassIcon className="h-5 w-5 absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />
           </div>
+          <div className="OppApp">Click on Opportunity to Apply</div>
           <div className="mt-8 text-left px-8">
             <div className="mt-8 flex flex-col space-x-4 justify-center">
               {/* Display OpportunitiesList */}
-              <OpportunitiesList opportunities={filteredOpportunities} />
+              <NavLink to="ApplicationPage">
+                <OpportunitiesList opportunities={filteredOpportunities} />
+              </NavLink>
             </div>
           </div>
         </div>
