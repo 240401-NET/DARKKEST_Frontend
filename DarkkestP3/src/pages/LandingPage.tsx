@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { GetUserOpps, CreateOpp } from "../services/opportunityService";
+import { GetAllOpps, CreateOpp } from "../services/opportunityService";
 import LeftSideBar from "../components/LeftSideBar";
 import OpportunitiesList from "../components/OpportunitiesList";
 import OpportunityFormModal from "../components/OpportunityFormModal";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 interface Opportunity {
+  oppId: number;
+  appUserId: string;
   jobTitle: string;
   description: string;
 }
 
 const LandingPage: React.FC = () => {
+  const [oppId, setoppIdState] = useState(0);
+  const [appUserId, setappUserIdState] = useState("");
   const [JobTitle, setJobTitleState] = useState("");
   const [Description, setDescriptionState] = useState("");
   const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
@@ -19,11 +23,13 @@ const LandingPage: React.FC = () => {
 
   useEffect(() => {
     const fetchOpportunities = async () => {
-      const res = await GetUserOpps();
-      if (!res) {
-        throw new Error("Failed to fetch opportunities");
+      try {
+        const res = await GetAllOpps();
+        const data = await res;
+        setOpportunities(data);
+      } catch (error) {
+        console.error("Failed to fetch opportunities:", error);
       }
-      setOpportunities(res);
     };
     fetchOpportunities();
   }, []);
@@ -40,7 +46,17 @@ const LandingPage: React.FC = () => {
         throw new Error("Failed to create opportunity");
       }
       const newOpportunity = await res.json();
-      setOpportunities([...opportunities, { jobTitle: JobTitle, description: Description }]);
+      setOpportunities([
+        ...opportunities,
+        {
+          oppId: oppId,
+          appUserId: appUserId,
+          jobTitle: JobTitle,
+          description: Description,
+        },
+      ]);
+      setoppIdState(0);
+      setappUserIdState("");
       setJobTitleState("");
       setDescriptionState("");
       setIsModalOpen(false);
@@ -61,7 +77,10 @@ const LandingPage: React.FC = () => {
         {/* Main Content */}
         <div className="flex-2 bg-white w-2/4 pt-20 p-4">
           <div className="flex justify-between items-center mb-4">
-            <h1 className="text-2xl font-semibold leading-tight" style={{ fontFamily: "Lato, sans-serif", fontWeight: 400 }}>
+            <h1
+              className="text-2xl font-semibold leading-tight"
+              style={{ fontFamily: "Lato, sans-serif", fontWeight: 400 }}
+            >
               Opportunities
             </h1>
             <button
@@ -92,7 +111,9 @@ const LandingPage: React.FC = () => {
         </div>
 
         {/* Right Sidebar */}
-        <div className="flex-1 bg-gray-200 p-4">{/* Right sidebar content */}</div>
+        <div className="flex-1 bg-gray-200 p-4">
+          {/* Right sidebar content */}
+        </div>
       </div>
 
       {/* Modal for creating new opportunities */}
