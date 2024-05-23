@@ -1,4 +1,4 @@
-import { BaseURL } from "../constants/Constant";
+import { BaseURL } from '../constants/Constant';
 
 export const GetAllOpps = async () => {
   const url = BaseURL + "opportunity";

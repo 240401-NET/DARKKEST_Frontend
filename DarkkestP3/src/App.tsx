@@ -1,6 +1,6 @@
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from './context/AuthContext';
 // packages
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 // pages
 import LandingPage from "./pages/LandingPage";
 import AuthPage from "./pages/AuthPage"; // New AuthPage component
@@ -18,10 +18,14 @@ import Profile from "./pages/Profile.tsx";
 
 
 function App() {
-  const [selectedPage, setSelectedPage] = useState<SelectedPage>(SelectedPage.Home);
-  const [selectedAuthForm, setSelectedAuthForm] = useState<SelectedAuthForm>(SelectedAuthForm.Register);
+  const [selectedPage, setSelectedPage] = useState<SelectedPage>(
+    SelectedPage.Home,
+  );
+  const [selectedAuthForm, setSelectedAuthForm] = useState<SelectedAuthForm>(
+    SelectedAuthForm.Register,
+  );
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY === 0) {
@@ -30,22 +34,33 @@ function App() {
       }
       if (window.scrollY !== 0) setIsTopOfPage(false);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <div className="app">
       <AuthProvider>
-        <NavBar 
+        <NavBar
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
           setSelectedAuthForm={setSelectedAuthForm}
           isTopOfPage={isTopOfPage}
         />
         <Routes>
-          <Route path ="/" element = {<Hero setSelectedAuthForm={setSelectedAuthForm}/>} />
-          <Route path="/auth" element={<AuthPage selectedAuthForm={selectedAuthForm} setSelectedAuthForm={setSelectedAuthForm} />} />
+          <Route
+            path="/"
+            element={<Hero setSelectedAuthForm={setSelectedAuthForm} />}
+          />
+          <Route
+            path="/auth"
+            element={
+              <AuthPage
+                selectedAuthForm={selectedAuthForm}
+                setSelectedAuthForm={setSelectedAuthForm}
+              />
+            }
+          />
           <Route path="/landing" element={<LandingPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/organizations" element={<OrganizationPage />} />
@@ -58,7 +73,6 @@ function App() {
         </Routes>
       </AuthProvider>
     </div>
-
   );
 }
 
