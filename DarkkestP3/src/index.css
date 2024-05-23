@@ -14,3 +14,46 @@ body,
     font-family: 'Lato', sans-serif;
     @apply text-black;
 }
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure the navbar is on top */
+}
+
+.main-content {
+    padding-top: 80px; /* Adjust this value based on the height of your navbar */
+}
+/* Additional custom styles */
+.input-field {
+    @apply w-full p-2 mb-2 border border-gray-300 rounded-md;
+}
+
+.button {
+    @apply px-4 py-2 rounded-md text-white cursor-pointer;
+}
+
+.button-register {
+    @apply bg-blue-500;
+}
+
+.button-edit {
+    @apply bg-green-500;
+}
+
+.button-delete {
+    @apply bg-green-700;
+}
+
+.organization-card {
+    @apply p-4 bg-gray-100 rounded-md shadow-sm mb-4;
+}
+
+.organization-card h3 {
+    @apply text-xl font-semibold;
+}
+
+.organization-card p {
+    @apply text-gray-600;
+}
