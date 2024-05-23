@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { UserProfile, getProfile, updateUserProfile, deleteUserProfile } from "../services/profileServices";
 
 const ProfilePage: React.FC = () => {
-  const [userId, setUserId] = useState("");
+  const [currentUserId, setUserId] = useState("");
   const [profileId, setProfileId] = useState(0);
   const [interests, setInterests] = useState("");
   const [skills, setSkills] = useState("");
@@ -11,7 +11,7 @@ const ProfilePage: React.FC = () => {
   useEffect(() => {
     getProfile().then((profile) => {
       if (profile) {
-        setUserId(userId);
+        setUserId(currentUserId);
         setProfileId(profileId);
         setInterests(interests);
         setSkills(skills);
@@ -37,8 +37,21 @@ const ProfilePage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const updatedProfile: UserProfile = {
-      
+      // ProfileId: profileId,
+      userId: currentUserId,
+      updatedInterests: interests,
+      updatedSkills: skills,
+      updatedMissionStatement: missionStatement,
     }
+    updateUserProfile(updatedProfile).then((profile) => {
+      if (profile) {
+        setUserId(currentUserId);
+        // setProfileId(profileId);
+        setInterests(interests);
+        setSkills(skills);
+        setMissionStatement(missionStatement);
+      }
+    })
   };
 
   return (
