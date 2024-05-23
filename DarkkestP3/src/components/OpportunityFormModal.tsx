@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -17,7 +17,7 @@ const OpportunityFormModal: React.FC<ModalProps> = ({
   JobTitle,
   Description,
   setJobTitleState,
-  setDescriptionState
+  setDescriptionState,
 }) => {
   if (!isOpen) return null;
 
@@ -28,26 +28,35 @@ const OpportunityFormModal: React.FC<ModalProps> = ({
           &times;
         </button>
         <form onSubmit={onSubmit}>
-          <label className="block text-left mb-2" style={{ fontFamily: "Lato, sans-serif", fontWeight: 400 }}>
+          <label
+            className="block text-left mb-2"
+            style={{ fontFamily: 'Lato, sans-serif', fontWeight: 400 }}
+          >
             Job Title:
             <input
               type="text"
               value={JobTitle}
               onChange={(e) => setJobTitleState(e.target.value)}
               className="border rounded p-2 w-full mt-1"
-              style={{ fontFamily: "Lato, sans-serif", fontWeight: 300 }}
+              style={{ fontFamily: 'Lato, sans-serif', fontWeight: 300 }}
             />
           </label>
-          <label className="block text-left mb-2" style={{ fontFamily: "Lato, sans-serif", fontWeight: 400 }}>
+          <label
+            className="block text-left mb-2"
+            style={{ fontFamily: 'Lato, sans-serif', fontWeight: 400 }}
+          >
             Description:
             <textarea
               value={Description}
               onChange={(e) => setDescriptionState(e.target.value)}
               className="border rounded p-2 w-full mt-1"
-              style={{ fontFamily: "Lato, sans-serif", fontWeight: 300 }}
+              style={{ fontFamily: 'Lato, sans-serif', fontWeight: 300 }}
             />
           </label>
-          <button type="submit" className="bg-primary-green text-white font-bold py-2 px-4 rounded mt-4">
+          <button
+            type="submit"
+            className="bg-primary-green text-white font-bold py-2 px-4 rounded mt-4"
+          >
             Save
           </button>
         </form>

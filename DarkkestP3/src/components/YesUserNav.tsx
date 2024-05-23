@@ -1,10 +1,7 @@
-import { useAuth } from "../context/AuthContext";
-
-
+import { useAuth } from '../context/AuthContext';
 
 const YesUserNav = () => {
   const { logoutUser } = useAuth();
-
 
   const handleLogout = () => {
     logoutUser();

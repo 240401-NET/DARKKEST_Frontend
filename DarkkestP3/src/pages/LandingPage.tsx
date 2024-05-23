@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { GetUserOpps, CreateOpp } from "../services/opportunityService";
-import LeftSideBar from "../components/LeftSideBar";
-import OpportunitiesList from "../components/OpportunitiesList";
-import OpportunityFormModal from "../components/OpportunityFormModal";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import React, { useState, useEffect } from 'react';
+import {
+  GetUserOpps,
+  CreateOpp,
+  GetAllOpps,
+} from '../services/opportunityService';
+import LeftSideBar from '../components/LeftSideBar';
+import OpportunitiesList from '../components/OpportunitiesList';
+import OpportunityFormModal from '../components/OpportunityFormModal';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 interface Opportunity {
   jobTitle: string;
@@ -11,17 +15,17 @@ interface Opportunity {
 }
 
 const LandingPage: React.FC = () => {
-  const [JobTitle, setJobTitleState] = useState("");
-  const [Description, setDescriptionState] = useState("");
+  const [JobTitle, setJobTitleState] = useState('');
+  const [Description, setDescriptionState] = useState('');
   const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchOpportunities = async () => {
-      const res = await GetUserOpps();
+      const res = await GetAllOpps();
       if (!res) {
-        throw new Error("Failed to fetch opportunities");
+        throw new Error('Failed to fetch opportunities');
       }
       setOpportunities(res);
     };
@@ -37,12 +41,15 @@ const LandingPage: React.FC = () => {
     try {
       const res = await CreateOpp(opportunityData);
       if (!res || !res.ok) {
-        throw new Error("Failed to create opportunity");
+        throw new Error('Failed to create opportunity');
       }
       const newOpportunity = await res.json();
-      setOpportunities([...opportunities, { jobTitle: JobTitle, description: Description }]);
-      setJobTitleState("");
-      setDescriptionState("");
+      setOpportunities([
+        ...opportunities,
+        { jobTitle: JobTitle, description: Description },
+      ]);
+      setJobTitleState('');
+      setDescriptionState('');
       setIsModalOpen(false);
     } catch (error) {
       console.error(error);
@@ -50,7 +57,7 @@ const LandingPage: React.FC = () => {
   };
 
   const filteredOpportunities = opportunities.filter((opportunity) =>
-    opportunity.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
+    opportunity.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -61,7 +68,10 @@ const LandingPage: React.FC = () => {
         {/* Main Content */}
         <div className="flex-2 bg-white w-2/4 pt-20 p-4">
           <div className="flex justify-between items-center mb-4">
-            <h1 className="text-2xl font-semibold leading-tight" style={{ fontFamily: "Lato, sans-serif", fontWeight: 400 }}>
+            <h1
+              className="text-2xl font-semibold leading-tight"
+              style={{ fontFamily: 'Lato, sans-serif', fontWeight: 400 }}
+            >
               Opportunities
             </h1>
             <button
@@ -79,7 +89,7 @@ const LandingPage: React.FC = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="border rounded p-2 w-full pl-10"
-              style={{ fontFamily: "Lato, sans-serif", fontWeight: 400 }}
+              style={{ fontFamily: 'Lato, sans-serif', fontWeight: 400 }}
             />
             <MagnifyingGlassIcon className="h-5 w-5 absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />
           </div>
@@ -92,7 +102,9 @@ const LandingPage: React.FC = () => {
         </div>
 
         {/* Right Sidebar */}
-        <div className="flex-1 bg-gray-200 p-4">{/* Right sidebar content */}</div>
+        <div className="flex-1 bg-gray-200 p-4">
+          {/* Right sidebar content */}
+        </div>
       </div>
 
       {/* Modal for creating new opportunities */}
