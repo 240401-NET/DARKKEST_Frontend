@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { GetUserOpps, CreateOpp } from "../services/opportunityService";
 
 interface Opportunity {
-  JobTitle: string[];
-  Description: string;
+  jobTitle: string;
+  description: string;
 }
 
 const CreateOpportunitiesPage: React.FC = () => {
-  const [JobTitle, setJobTitleState] = useState<string[]>([]);
+  const [JobTitle, setJobTitleState] = useState("");
   const [Description, setDescriptionState] = useState("");
   const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
 
@@ -17,7 +17,9 @@ const CreateOpportunitiesPage: React.FC = () => {
       if (!res) {
         throw new Error('Failed to fetch opportunities');
       }
+      console.log(res);
       setOpportunities(res);
+      console.log(opportunities);
     };
     fetchOpportunities();
   }, []);
@@ -34,9 +36,9 @@ const CreateOpportunitiesPage: React.FC = () => {
         throw new Error('Failed to create opportunity');
       }
       const newOpportunity = await res.json();
-      setOpportunities([...opportunities, newOpportunity]);
-      setJobTitleState([]);
-      setDescriptionState("");
+      setOpportunities([...opportunities, {jobTitle: JobTitle, description: Description}]);
+      //setJobTitleState([]);
+      //setDescriptionState("");
     } catch (error) {
       console.error(error);
     }
@@ -49,8 +51,8 @@ const CreateOpportunitiesPage: React.FC = () => {
           Job Title:
           <input
             type="text"
-            value={JobTitle.join(", ")}
-            onChange={(e) => setJobTitleState(e.target.value.split(", "))}
+            value={JobTitle}
+            onChange={(e) => setJobTitleState(e.target.value)}
           />
         </label>
         <label>
@@ -65,8 +67,8 @@ const CreateOpportunitiesPage: React.FC = () => {
       <div>
         {opportunities.map((opportunity, index) => (
           <div key={index}>
-            <h2>Job Title: {opportunity.JobTitle.join(", ")}</h2>
-            <p>Description: {opportunity.Description}</p>
+            <h2>Job Title: {opportunity.jobTitle}</h2>
+            <p>Description: {opportunity.description}</p>
           </div>
         ))}
       </div>
