@@ -1,33 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import {
-  GetUserOpps,
-  CreateOpp,
-  GetAllOpps,
-} from '../services/opportunityService';
-import LeftSideBar from '../components/LeftSideBar';
-import OpportunitiesList from '../components/OpportunitiesList';
-import OpportunityFormModal from '../components/OpportunityFormModal';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import React, { useState, useEffect } from "react";
+import { GetAllOpps, CreateOpp } from "../services/opportunityService";
+import LeftSideBar from "../components/LeftSideBar";
+import OpportunitiesList from "../components/OpportunitiesList";
+import OpportunityFormModal from "../components/OpportunityFormModal";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 interface Opportunity {
+  oppId: number;
+  appUserId: string;
   jobTitle: string;
   description: string;
 }
 
 const LandingPage: React.FC = () => {
-  const [JobTitle, setJobTitleState] = useState('');
-  const [Description, setDescriptionState] = useState('');
+  const [oppId, setoppIdState] = useState(0);
+  const [appUserId, setappUserIdState] = useState("");
+  const [JobTitle, setJobTitleState] = useState("");
+  const [Description, setDescriptionState] = useState("");
   const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchOpportunities = async () => {
-      const res = await GetAllOpps();
-      if (!res) {
-        throw new Error('Failed to fetch opportunities');
+      try {
+        const res = await GetAllOpps();
+        const data = await res;
+        setOpportunities(data);
+      } catch (error) {
+        console.error("Failed to fetch opportunities:", error);
       }
-      setOpportunities(res);
     };
     fetchOpportunities();
   }, []);
@@ -46,10 +48,17 @@ const LandingPage: React.FC = () => {
       const newOpportunity = await res.json();
       setOpportunities([
         ...opportunities,
-        { jobTitle: JobTitle, description: Description },
+        {
+          oppId: oppId,
+          appUserId: appUserId,
+          jobTitle: JobTitle,
+          description: Description,
+        },
       ]);
-      setJobTitleState('');
-      setDescriptionState('');
+      setoppIdState(0);
+      setappUserIdState("");
+      setJobTitleState("");
+      setDescriptionState("");
       setIsModalOpen(false);
     } catch (error) {
       console.error(error);
@@ -102,6 +111,9 @@ const LandingPage: React.FC = () => {
         </div>
 
         {/* Right Sidebar */}
+        <div className="flex-1 bg-gray-200 p-4">
+          {/* Right sidebar content */}
+        </div>
         <div className="flex-1 bg-gray-200 p-4">
           {/* Right sidebar content */}
         </div>
