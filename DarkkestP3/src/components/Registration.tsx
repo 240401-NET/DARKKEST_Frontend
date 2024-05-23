@@ -70,6 +70,7 @@ const Registration = () => {
         e.preventDefault();
         setButton(false);
         setSuccess(false);
+        setErrMsg("");
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
         if (!v1 || !v2) {
