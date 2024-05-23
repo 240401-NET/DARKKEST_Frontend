@@ -28,3 +28,19 @@ body,
   justify-content: center;
   margin-top: 150px;
 }
+
+#MOB {
+  border: black 2px solid;
+  background-color: rgb(212, 211, 213);
+  padding: 3px;
+  border-radius: 5px;
+}
+
+#MOB:hover {
+  background-color: white;
+}
+
+#MOBDiv {
+  display: flex;
+  justify-content: right;
+}

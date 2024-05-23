@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GetUserOpps } from "../services/opportunityService";
 import LeftSideBar from "../components/LeftSideBar";
-import OpportunitiesList from "../components/OpportunitiesList";
+import MyOpportunitiesList from "../components/MyOpportunitiesList";
 import OpportunityFormModal from "../components/OpportunityFormModal";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { CreateOpp } from "../services/opportunityService";
@@ -111,7 +111,7 @@ function OpportunityPage() {
           <div className="mt-8 text-left px-8">
             <div className="mt-8 flex flex-col space-x-4 justify-center">
               {/* Display OpportunitiesList */}
-              <OpportunitiesList opportunities={filteredOpportunities} />
+              <MyOpportunitiesList opportunities={filteredOpportunities} />
             </div>
           </div>
         </div>
