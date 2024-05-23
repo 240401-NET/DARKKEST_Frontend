@@ -8,14 +8,16 @@ const ProfilePage: React.FC = () => {
   const [interests, setInterests] = useState("");
   const [skills, setSkills] = useState("");
   const [missionStatement, setMissionStatement] = useState("");
+  
   useEffect(() => {
     getProfile().then((profile) => {
       if (profile) {
-        setUserId(currentUserId);
-        setProfileId(profileId);
-        setInterests(interests);
-        setSkills(skills);
-        setMissionStatement(missionStatement);
+        //console.log(profile)
+        setUserId(profile.userId);
+        //setProfileId(profile.profileId);
+        setInterests(profile.interersts);
+        setSkills(profile.skills);
+        setMissionStatement(profile.missionStatement);
       }
     })
   }, []);

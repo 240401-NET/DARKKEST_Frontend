@@ -9,7 +9,15 @@ export interface UserProfile {
     updatedMissionStatement: string;
 }
 
-export const getProfile = async (): Promise<UserProfile | null> => {
+export interface curProfile {
+    // ProfileId: number;
+    userId: string;
+    interersts: string;
+    skills: string;
+    missionStatement: string;
+}
+
+export const getProfile = async (): Promise<curProfile | null> => {
     try{
         const response = await fetch(BaseURL + "profile/get", {
             method: "GET",
@@ -18,7 +26,7 @@ export const getProfile = async (): Promise<UserProfile | null> => {
         });
         
         if (response.ok) {
-            const result: UserProfile = await response.json();
+            const result: curProfile = await response.json();
             return result;
         } else {
             console.error("Failed to get profile:", response.status, response.statusText);
