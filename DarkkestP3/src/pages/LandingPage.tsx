@@ -4,6 +4,7 @@ import LeftSideBar from "../components/LeftSideBar";
 import OpportunitiesList from "../components/OpportunitiesList";
 import OpportunityFormModal from "../components/OpportunityFormModal";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useAuth } from "../context/AuthContext";
 
 interface Opportunity {
   jobTitle: string;
@@ -17,15 +18,17 @@ const LandingPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const {token} = useAuth();
+
   useEffect(() => {
     const fetchOpportunities = async () => {
-      const res = await GetAllOpps();
+      const res = await GetAllOpps(token);
       if (!res) {
         throw new Error("Failed to fetch opportunities");
       }
       setOpportunities(res);
     };
-    fetchOpportunities();
+    fetchOpportunities();    
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
