@@ -1,39 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { GetAllOpps, CreateOpp } from "../services/opportunityService";
+import { GetUserOpps } from "../services/opportunityService";
 import LeftSideBar from "../components/LeftSideBar";
-import OpportunitiesList from "../components/OpportunitiesList";
+import MyOpportunitiesList from "../components/MyOpportunitiesList";
 import OpportunityFormModal from "../components/OpportunityFormModal";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { NavLink } from "react-router-dom";
+import { CreateOpp } from "../services/opportunityService";
+import Elder from "../assets/Elder.png";
 
-interface Opportunity {
-  oppId: number;
-  appUserId: string;
-  jobTitle: string;
-  description: string;
-}
+function OpportunityPage() {
+  interface Opportunity {
+    oppId: number;
+    appUserId: string;
+    jobTitle: string;
+    description: string;
+  }
 
-const LandingPage: React.FC = () => {
   const [oppId, setoppIdState] = useState(0);
   const [appUserId, setappUserIdState] = useState("");
   const [JobTitle, setJobTitleState] = useState("");
   const [Description, setDescriptionState] = useState("");
-  const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [userOpportunities, setUserOpportunities] = useState<Opportunity[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    const fetchOpportunities = async () => {
+    const fetchUserOpportunities = async () => {
       try {
-        const res = await GetAllOpps();
+        const res = await GetUserOpps();
         const data = await res;
-        setOpportunities(data);
+        setUserOpportunities(data);
       } catch (error) {
         console.error("Failed to fetch opportunities:", error);
       }
     };
-    fetchOpportunities();
+    fetchUserOpportunities();
   }, []);
+
+
+  // function setIsModalOpen(arg0: boolean): void {
+  //   throw new Error("Function not implemented.");
+  // }
+
+  const filteredOpportunities = userOpportunities.filter((userOpportunity) =>
+    userOpportunity.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,11 +54,11 @@ const LandingPage: React.FC = () => {
     try {
       const res = await CreateOpp(opportunityData);
       if (!res || !res.ok) {
-        throw new Error('Failed to create opportunity');
+        throw new Error("Failed to create opportunity");
       }
       const newOpportunity = await res.json();
-      setOpportunities([
-        ...opportunities,
+      setUserOpportunities([
+        ...userOpportunities,
         {
           oppId: oppId,
           appUserId: appUserId,
@@ -66,21 +76,17 @@ const LandingPage: React.FC = () => {
     }
   };
 
-  const filteredOpportunities = opportunities.filter((opportunity) =>
-    opportunity.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
-
   return (
     <section className="min-h-screen flex flex-col bg-secondary-white pt-10 md:h-full">
       <div className="flex h-full">
-        {/* Left Sidebar */}
-        <LeftSideBar />
-        {/* Main Content */}
+        <div>
+          <LeftSideBar />
+        </div>
         <div className="flex-2 bg-white w-2/4 pt-20 p-4">
           <div className="flex justify-between items-center mb-4">
             <h1
               className="text-2xl font-semibold leading-tight"
-              style={{ fontFamily: 'Lato, sans-serif', fontWeight: 400 }}
+              style={{ fontFamily: "Lato, sans-serif", fontWeight: 400 }}
             >
               Opportunities
             </h1>
@@ -99,42 +105,35 @@ const LandingPage: React.FC = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="border rounded p-2 w-full pl-10"
-              style={{ fontFamily: 'Lato, sans-serif', fontWeight: 400 }}
+              style={{ fontFamily: "Lato, sans-serif", fontWeight: 400 }}
             />
             <MagnifyingGlassIcon className="h-5 w-5 absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />
           </div>
-          <div className="OppApp">Click on Opportunity to Apply</div>
           <div className="mt-8 text-left px-8">
             <div className="mt-8 flex flex-col space-x-4 justify-center">
               {/* Display OpportunitiesList */}
-              <NavLink to="ApplicationPage">
-                <OpportunitiesList opportunities={filteredOpportunities} />
-              </NavLink>
+              <MyOpportunitiesList />
             </div>
           </div>
         </div>
 
-        {/* Right Sidebar */}
         <div className="flex-1 bg-gray-200 p-4">
           {/* Right sidebar content */}
+          <img src={Elder} id="ElderPic" />
         </div>
-        <div className="flex-1 bg-gray-200 p-4">
-          {/* Right sidebar content */}
-        </div>
-      </div>
 
-      {/* Modal for creating new opportunities */}
-      <OpportunityFormModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleSubmit}
-        JobTitle={JobTitle}
-        Description={Description}
-        setJobTitleState={setJobTitleState}
-        setDescriptionState={setDescriptionState}
-      />
+        {/* Modal for creating new opportunities */}
+        <OpportunityFormModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleSubmit}
+          JobTitle={JobTitle}
+          Description={Description}
+          setJobTitleState={setJobTitleState}
+          setDescriptionState={setDescriptionState}
+        />
+      </div>
     </section>
   );
-};
-
-export default LandingPage;
+}
+export default OpportunityPage;

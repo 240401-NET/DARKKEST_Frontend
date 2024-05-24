@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -8,11 +8,84 @@ html,
 body,
 #root,
 .app {
-    height: 100%;
+  height: 100%;
+  width: 100%;
+  background-color: #f8f8ff;
+  font-family: "Lato", sans-serif;
+  @apply text-black;
+}
+
+.OppApp {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+  color: rgb(84, 18, 145);
+}
+
+#ElderPic {
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+}
+
+#MOB {
+  border: black 2px solid;
+  background-color: rgb(212, 211, 213);
+  padding: 3px;
+  border-radius: 5px;
+}
+
+#MOB:hover {
+  background-color: white;
+}
+
+#MOBDiv {
+  display: flex;
+  justify-content: right;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
     width: 100%;
-    background-color: #F8F8FF;
-    font-family: 'Lato', sans-serif;
-    @apply text-black;
+    z-index: 1000; /* Ensure the navbar is on top */
+}
+
+.main-content {
+    padding-top: 80px; /* Adjust this value based on the height of your navbar */
+}
+/* Additional custom styles */
+.input-field {
+    @apply w-full p-2 mb-2 border border-gray-300 rounded-md;
+}
+
+.button {
+    @apply px-4 py-2 rounded-md text-white cursor-pointer;
+}
+
+.button-register {
+    @apply bg-blue-500;
+}
+
+.button-edit {
+    @apply bg-green-500;
+}
+
+.button-delete {
+    @apply bg-green-700;
+}
+
+.organization-card {
+    @apply p-4 bg-gray-100 rounded-md shadow-sm mb-4;
+}
+
+.organization-card h3 {
+    @apply text-xl font-semibold;
+}
+
+.organization-card p {
+    @apply text-gray-600;
 }
 
 .navbar {
