@@ -118,9 +118,6 @@ const LandingPage: React.FC = () => {
         <div className="flex-1 bg-gray-200 p-4">
           {/* Right sidebar content */}
         </div>
-        <div className="flex-1 bg-gray-200 p-4">
-          {/* Right sidebar content */}
-        </div>
       </div>
 
       {/* Modal for creating new opportunities */}

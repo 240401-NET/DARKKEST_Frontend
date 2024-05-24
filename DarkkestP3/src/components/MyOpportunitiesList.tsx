@@ -7,35 +7,28 @@ interface MyOpportunity {
   jobTitle: string;
   description: string;
   oppId: number;
+  appUserId: string;
 }
 
-const MyOpportunitiesList: React.FC = () => {
-  const [myOpportunities, setMyOpportunities] = useState<MyOpportunity[]>([]);
+type MyOpportunitiesListProps = {
+  userOpportunities: MyOpportunity[];
+  setUserOpportunities: (myOpportunities: MyOpportunity[]) => void;
+};
 
-  useEffect(() => {
-    const fetchUserOpportunities = async () => {
-      try {
-        const res = await GetUserOpps();
-        const data = await res;
-        setMyOpportunities(data);
-      } catch (error) {
-        console.error("Failed to fetch opportunities:", error);
-      }
-    };
-    fetchUserOpportunities();
-  }, [myOpportunities]);
+const MyOpportunitiesList = ({userOpportunities,setUserOpportunities}: MyOpportunitiesListProps) => {
+
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     let value = e.currentTarget.getAttribute("data-value");
     if (value) {
-      let tuneId: number = +value;
+      const tuneId: number = parseInt(value);
       try {
         const res = await DeleteOpp(tuneId);
         if (!res || !res.ok) {
           throw new Error("Failed to create opportunity");
         }
-        setMyOpportunities(myOpportunities.filter((opp) => opp.oppId !== tuneId))
+        setUserOpportunities(userOpportunities.filter((opp) => opp.oppId !== tuneId))
       } catch (error) {
         console.error("Failed to delete", error);
       }
@@ -48,7 +41,7 @@ const MyOpportunitiesList: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      {myOpportunities.map((opportunity, index) => (
+      {userOpportunities.map((opportunity, index) => (
         <div key={index} className="border rounded p-4 shadow-sm">
           <h2 className="text-xl font-semibold mb-2">
             Job Title: {opportunity.jobTitle}
@@ -58,7 +51,7 @@ const MyOpportunitiesList: React.FC = () => {
           </p>
           <div id="MOBDiv">
             <button
-              data-value={opportunity.oppId.toString()}
+              data-value={opportunity.oppId}
               onClick={handleClick}
               id="MOB"
             >

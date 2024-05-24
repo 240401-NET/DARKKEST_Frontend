@@ -93,7 +93,7 @@ body,
     top: 0;
     width: 100%;
     z-index: 1000; /* Ensure the navbar is on top */
-}
+} 
 
 .main-content {
     padding-top: 80px; /* Adjust this value based on the height of your navbar */
