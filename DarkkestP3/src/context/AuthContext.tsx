@@ -47,21 +47,33 @@ export const AuthProvider = ({ children }: Props) => {
     }
   };
 
-  const loginUser = async (username: string, password: string) => {
-    return await UserLogin(username, password)
-      .then((res) => {
-        if (res) {
-          localStorage.setItem('token', res.url + res.statusText);
-          localStorage.setItem('user', username);
-          setToken(res.url + res.statusText);
-          setUser(username!);
-          return res;
+      const loginUser =  async (username: string, password: string) => {
+        return await UserLogin(username, password)
+          .then((res) => {
+            if(res){                
+              localStorage.setItem("user", username);
+              setUser(username!);
+              return res;
+            }
+          })
+          .then(res => res?.json())
+          .then(token =>{ 
+            setToken(token);
+            localStorage.setItem("token", token);
+            console.log(token);
+            return token;
+          })
+          .catch((error) => {
+            console.error(error);
+          })
+
         }
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
 
   const logoutUser = async () => {
     await UserLogout();
@@ -78,9 +90,7 @@ export const AuthProvider = ({ children }: Props) => {
   };
 
   return (
-    <AuthContext.Provider
-      value={{ loginUser, isLoggedIn, user, token, register, logoutUser }}
-    >
+    <AuthContext.Provider value={{ loginUser, isLoggedIn, user, token, register, logoutUser }}>
       {isAuthenticated ? children : null}
     </AuthContext.Provider>
   );
