@@ -43,9 +43,9 @@ function OpportunityPage() {
   //   throw new Error("Function not implemented.");
   // }
 
-  const filteredOpportunities = userOpportunities.filter((userOpportunity) =>
-    userOpportunity.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredOpportunities = userOpportunities.filter((userOpportunity) =>
+  //   userOpportunity.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

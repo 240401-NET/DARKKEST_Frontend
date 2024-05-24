@@ -47,33 +47,26 @@ export const AuthProvider = ({ children }: Props) => {
     }
   };
 
-      const loginUser =  async (username: string, password: string) => {
-        return await UserLogin(username, password)
-          .then((res) => {
-            if(res){                
-              localStorage.setItem("user", username);
-              setUser(username!);
-              return res;
-            }
-          })
-          .then(res => res?.json())
-          .then(token =>{ 
-            setToken(token);
-            localStorage.setItem("token", token);
-            console.log(token);
-            return token;
-          })
-          .catch((error) => {
-            console.error(error);
-          })
-
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
+    const loginUser =  async (username: string, password: string) => {
+      return await UserLogin(username, password)
+        .then((res) => {
+          if(res){                
+            localStorage.setItem("user", username);
+            setUser(username!);
+            return res;
+          }
+        })
+        .then(res => res?.json())
+        .then(token =>{ 
+          setToken(token);
+          localStorage.setItem("token", token);
+          console.log(token);
+          return token;
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+      }
 
   const logoutUser = async () => {
     await UserLogout();
