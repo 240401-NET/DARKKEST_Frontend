@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { GetAllOpps, CreateOpp } from "../services/opportunityService";
+import { GetUserOpps, CreateOpp, GetAllOpps } from "../services/opportunityService";
 import LeftSideBar from "../components/LeftSideBar";
 import OpportunitiesList from "../components/OpportunitiesList";
 import OpportunityFormModal from "../components/OpportunityFormModal";

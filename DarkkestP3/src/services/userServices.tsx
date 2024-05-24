@@ -1,33 +1,33 @@
 import { BaseURL } from '../constants/Constant';
 
-export const UserLogin = (username: string, password: string) => {
-  const loginURL = BaseURL + 'login';
-  return fetch(loginURL, {
-    method: 'POST',
-    mode: 'cors',
-    credentials: 'include',
-    body: JSON.stringify({
-      username: username,
-      password: password,
-    }),
-    headers: {
-      Accept: 'application/json',
-      'Content-type': 'application/json',
-    },
-  })
-    .then((response) => {
-      if (response.ok) {
-        console.log('Response', response);
-        //window.alert("SignIn successful");
-        return response;
-      }
-    })
-    .catch((error) => {
-      //window.alert("Signin unsuccessful. Please try again!")
-      console.log(error);
-      throw error;
-    });
-};
+export const UserLogin = (username: string, password: string ) => {        
+    const loginURL =  BaseURL + "login";
+        return fetch(loginURL, {
+            method: "POST",
+            mode: 'cors',
+            credentials: "include",
+            body: JSON.stringify({
+                    "username": username,
+                    "password": password,
+                }),
+            headers: {
+                Accept: 'application/json',
+                'Content-type': 'application/json'
+            }
+            })
+            .then (response => {
+                if(response.ok) {
+                    //console.log("Response", response.body);
+                    //window.alert("SignIn successful");
+                    return response;
+                }
+            })
+            .catch (error => {
+                //window.alert("Signin unsuccessful. Please try again!")
+                console.log(error);
+                throw error;
+            })
+        }
 
 export const UserLogout = () => {
   const logoutURL = BaseURL + 'logout';

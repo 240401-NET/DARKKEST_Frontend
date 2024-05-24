@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage";
 import AuthPage from "./pages/AuthPage"; // New AuthPage component
 import NavBar from "./components/NavBar.tsx";
 import OrganizationPage from "./pages/OrganizationPage.tsx";
+
 import { useEffect, useState } from "react";
 import { SelectedAuthForm, SelectedPage } from "./shared/types.ts";
 import Hero from "./pages/Hero.tsx";
