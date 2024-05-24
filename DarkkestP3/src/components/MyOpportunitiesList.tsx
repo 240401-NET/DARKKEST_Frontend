@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { DeleteOpp } from "../services/opportunityService";
+import { useEffect } from "react";
+import { GetUserOpps } from "../services/opportunityService";
 
 interface MyOpportunity {
   jobTitle: string;
@@ -7,15 +9,22 @@ interface MyOpportunity {
   oppId: number;
 }
 
-interface MyOpportunitiesListProps {
-  opportunities: MyOpportunity[];
-  setOpportunities: React.Dispatch<React.SetStateAction<MyOpportunity[]>>;
-}
+const MyOpportunitiesList: React.FC = () => {
+  const [myOpportunities, setMyOpportunities] = useState<MyOpportunity[]>([]);
 
-const MyOpportunitiesList: React.FC<MyOpportunitiesListProps> = ({
-  opportunities,
-  setOpportunities,
-}) => {
+  useEffect(() => {
+    const fetchUserOpportunities = async () => {
+      try {
+        const res = await GetUserOpps();
+        const data = await res;
+        setMyOpportunities(data);
+      } catch (error) {
+        console.error("Failed to fetch opportunities:", error);
+      }
+    };
+    fetchUserOpportunities();
+  }, [myOpportunities]);
+
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     let value = e.currentTarget.getAttribute("data-value");
@@ -26,18 +35,20 @@ const MyOpportunitiesList: React.FC<MyOpportunitiesListProps> = ({
         if (!res || !res.ok) {
           throw new Error("Failed to create opportunity");
         }
-        setOpportunities(opportunities.filter((opp) => opp.oppId !== tuneId));
+        setMyOpportunities(myOpportunities.filter((opp) => opp.oppId !== tuneId))
       } catch (error) {
         console.error("Failed to delete", error);
       }
     } else {
-      console.error("No data-vale attribute found");
+      console.error("No data-value attribute found");
     }
   };
 
+ 
+
   return (
     <div className="space-y-4">
-      {opportunities.map((opportunity, index) => (
+      {myOpportunities.map((opportunity, index) => (
         <div key={index} className="border rounded p-4 shadow-sm">
           <h2 className="text-xl font-semibold mb-2">
             Job Title: {opportunity.jobTitle}

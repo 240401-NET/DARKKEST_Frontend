@@ -75,6 +75,8 @@ function OpportunityPage() {
     }
   };
 
+  useEffect(() => {}, [userOpportunities]);
+
   return (
     <section className="min-h-screen flex flex-col bg-secondary-white pt-10 md:h-full">
       <div className="flex h-full">
