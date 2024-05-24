@@ -1,12 +1,12 @@
-import React from "react";
-import Registration from "../components/Registration";
-import Login from "../components/Login";
-import { SelectedAuthForm } from "../shared/types";
+import React from 'react';
+import Registration from '../components/Registration';
+import Login from '../components/Login';
+import { SelectedAuthForm } from '../shared/types';
 
 type AuthPageProps = {
   selectedAuthForm: SelectedAuthForm;
   setSelectedAuthForm: (value: SelectedAuthForm) => void;
-}
+};
 
 const AuthPage = ({ selectedAuthForm, setSelectedAuthForm }: AuthPageProps) => {
   return (

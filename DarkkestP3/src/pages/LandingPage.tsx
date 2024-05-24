@@ -5,28 +5,35 @@ import OpportunitiesList from "../components/OpportunitiesList";
 import OpportunityFormModal from "../components/OpportunityFormModal";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useAuth } from "../context/AuthContext";
+import { NavLink } from "react-router-dom";
 
 interface Opportunity {
+  oppId: number;
+  appUserId: string;
   jobTitle: string;
   description: string;
 }
 
 const LandingPage: React.FC = () => {
+  const [oppId, setoppIdState] = useState(0);
+  const [appUserId, setappUserIdState] = useState("");
   const [JobTitle, setJobTitleState] = useState("");
   const [Description, setDescriptionState] = useState("");
   const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {token} = useAuth();
 
   useEffect(() => {
     const fetchOpportunities = async () => {
-      const res = await GetAllOpps(token);
-      if (!res) {
-        throw new Error("Failed to fetch opportunities");
+      try {
+        const res = await GetAllOpps(token);
+        const data = await res;
+        setOpportunities(data);
+      } catch (error) {
+        console.error("Failed to fetch opportunities:", error);
       }
-      setOpportunities(res);
     };
     fetchOpportunities();    
   }, []);
@@ -40,10 +47,20 @@ const LandingPage: React.FC = () => {
     try {
       const res = await CreateOpp(opportunityData);
       if (!res || !res.ok) {
-        throw new Error("Failed to create opportunity");
+        throw new Error('Failed to create opportunity');
       }
       const newOpportunity = await res.json();
-      setOpportunities([...opportunities, { jobTitle: JobTitle, description: Description }]);
+      setOpportunities([
+        ...opportunities,
+        {
+          oppId: oppId,
+          appUserId: appUserId,
+          jobTitle: JobTitle,
+          description: Description,
+        },
+      ]);
+      setoppIdState(0);
+      setappUserIdState("");
       setJobTitleState("");
       setDescriptionState("");
       setIsModalOpen(false);
@@ -53,7 +70,7 @@ const LandingPage: React.FC = () => {
   };
 
   const filteredOpportunities = opportunities.filter((opportunity) =>
-    opportunity.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
+    opportunity.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -64,7 +81,10 @@ const LandingPage: React.FC = () => {
         {/* Main Content */}
         <div className="flex-2 bg-white w-2/4 pt-20 p-4">
           <div className="flex justify-between items-center mb-4">
-            <h1 className="text-2xl font-semibold leading-tight" style={{ fontFamily: "Lato, sans-serif", fontWeight: 400 }}>
+            <h1
+              className="text-2xl font-semibold leading-tight"
+              style={{ fontFamily: 'Lato, sans-serif', fontWeight: 400 }}
+            >
               Opportunities
             </h1>
             <button
@@ -82,20 +102,25 @@ const LandingPage: React.FC = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="border rounded p-2 w-full pl-10"
-              style={{ fontFamily: "Lato, sans-serif", fontWeight: 400 }}
+              style={{ fontFamily: 'Lato, sans-serif', fontWeight: 400 }}
             />
             <MagnifyingGlassIcon className="h-5 w-5 absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />
           </div>
+          <div className="OppApp">Click on Opportunity to Apply</div>
           <div className="mt-8 text-left px-8">
             <div className="mt-8 flex flex-col space-x-4 justify-center">
               {/* Display OpportunitiesList */}
-              <OpportunitiesList opportunities={filteredOpportunities} />
+              <NavLink to="ApplicationPage">
+                <OpportunitiesList opportunities={filteredOpportunities} />
+              </NavLink>
             </div>
           </div>
         </div>
 
         {/* Right Sidebar */}
-        <div className="flex-1 bg-gray-200 p-4">{/* Right sidebar content */}</div>
+        <div className="flex-1 bg-gray-200 p-4">
+          {/* Right sidebar content */}
+        </div>
       </div>
 
       {/* Modal for creating new opportunities */}

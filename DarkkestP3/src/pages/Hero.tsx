@@ -10,16 +10,22 @@ type Props = {
 
 const Hero = ({ setSelectedAuthForm }: Props) => {
   const navigate = useNavigate();
-  
+
   const handleSelectLogin = () => {
     setSelectedAuthForm(SelectedAuthForm.Login);
-    navigate("/auth");
+    navigate('/auth');
   };
-  
+
   return (
-    <section id="home" className="min-h-screen flex flex-col gap-0 bg-gray-20 py-10 md:h-full md:pb-0">
+    <section
+      id="home"
+      className="min-h-screen flex flex-col gap-0 bg-gray-20 py-10 md:h-full md:pb-0"
+    >
       {/* Top half with an image */}
-      <div className="h-2/3 bg-cover bg-center" style={{ backgroundImage: `url(${communityPic})` }}>
+      <div
+        className="h-2/3 bg-cover bg-center"
+        style={{ backgroundImage: `url(${communityPic})` }}
+      >
         {/* You can add additional content here if needed */}
       </div>
 
@@ -27,7 +33,10 @@ const Hero = ({ setSelectedAuthForm }: Props) => {
       <div className="h-3/5 flex">
         <div className="flex-1 flex items-center justify-center bg-gray-100">
           {/* Left content */}
-          <div className="text-left text-6xl font-bold leading-tight" style={{ fontFamily: 'Lato, sans-serif', fontWeight: 700 }}>
+          <div
+            className="text-left text-6xl font-bold leading-tight"
+            style={{ fontFamily: 'Lato, sans-serif', fontWeight: 700 }}
+          >
             <p>Connecting</p>
             <p>Communities Through</p>
             <p>Volunteering</p>
@@ -37,8 +46,12 @@ const Hero = ({ setSelectedAuthForm }: Props) => {
         <div className="flex-1 flex items-center justify-center bg-gray-200">
           {/* Right content */}
           <div className="text-center px-8">
-            <p className="text-3xl" style={{ fontFamily: 'Lato, sans-serif', fontWeight: 100 }}>
-              Discover meaningful ways to give back and make a difference in your community.
+            <p
+              className="text-3xl"
+              style={{ fontFamily: 'Lato, sans-serif', fontWeight: 100 }}
+            >
+              Discover meaningful ways to give back and make a difference in
+              your community.
             </p>
             <div className="mt-8 flex space-x-4 justify-center">
               <button

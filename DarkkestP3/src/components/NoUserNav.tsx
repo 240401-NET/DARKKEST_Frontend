@@ -21,12 +21,12 @@ const NoUserNav = ({
   setIsMenuToggled,
   isMenuToggled,
 }: NoUserNavProps) => {
-  const flexBetween = "flex items-center justify-between";
+  const flexBetween = 'flex items-center justify-between';
   const navigate = useNavigate();
 
   const navigateToLoginForm = () => {
     setSelectedAuthForm(SelectedAuthForm.Login);
-    navigate("/auth");
+    navigate('/auth');
   };
 
   return (
@@ -35,22 +35,44 @@ const NoUserNav = ({
         <div className={`${flexBetween} w-full`}>
           {/* MIDDLE LINKS */}
           <div className={`${flexBetween} gap-8 text-sm`}>
-            <SmoothScrollLink page="Home" selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-            <SmoothScrollLink page="Discover" selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-            <SmoothScrollLink page="Volunteer" selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-            <SmoothScrollLink page="Donate" selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+            <SmoothScrollLink
+              page="Home"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
+            <SmoothScrollLink
+              page="Discover"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
+            <SmoothScrollLink
+              page="Volunteer"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
+            <SmoothScrollLink
+              page="Donate"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
           </div>
 
           {/* RIGHT HAND BUTTONS */}
           <div className={`${flexBetween} gap-8`}>
-            <button className="text-md hover:underline" onClick={navigateToLoginForm}>
+            <button
+              className="text-md hover:underline"
+              onClick={navigateToLoginForm}
+            >
               Sign In
             </button>
-            <ActionButton setSelectedAuthForm={setSelectedAuthForm}/>
+            <ActionButton setSelectedAuthForm={setSelectedAuthForm} />
           </div>
         </div>
       ) : (
-        <button className="rounded-full bg-primary-green p-2" onClick={() => setIsMenuToggled(!isMenuToggled)}>
+        <button
+          className="rounded-full bg-primary-green p-2"
+          onClick={() => setIsMenuToggled(!isMenuToggled)}
+        >
           <Bars3Icon className="h-6 w-6 text-white" />
         </button>
       )}
@@ -66,10 +88,26 @@ const NoUserNav = ({
           </div>
           {/* Menu Items */}
           <div className="ml-[33%] flex flex-col gap-10 text-2xl">
-            <SmoothScrollLink page="Home" selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-            <SmoothScrollLink page="Discover" selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-            <SmoothScrollLink page="Volunteer" selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-            <SmoothScrollLink page="Donate" selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+            <SmoothScrollLink
+              page="Home"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
+            <SmoothScrollLink
+              page="Discover"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
+            <SmoothScrollLink
+              page="Volunteer"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
+            <SmoothScrollLink
+              page="Donate"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
           </div>
         </div>
       )}
