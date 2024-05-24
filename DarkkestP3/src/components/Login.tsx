@@ -39,7 +39,7 @@ const Login = ({ setSelectedAuthForm }: LoginFormProps) => {
 
     let res = await loginUser(username, password);
 
-    if (res && res.ok) {
+    if (res) {
       // Navigate to a different page if login is successful
       navigate("/landing")
     } else {

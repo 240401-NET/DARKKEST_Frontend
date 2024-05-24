@@ -2,13 +2,13 @@ import { BaseURL } from "../constants/Constant";
 
 export const UserLogin = (username: string, password: string ) => {
         
-    const loginURL =  BaseURL + "login?useCookies=true&useSessionCookies=true";
+    const loginURL =  BaseURL + "login";
         return fetch(loginURL, {
             method: "POST",
             mode: 'cors',
             credentials: "include",
             body: JSON.stringify({
-                    "email": username,
+                    "username": username,
                     "password": password,
                 }),
             headers: {
@@ -18,7 +18,7 @@ export const UserLogin = (username: string, password: string ) => {
             })
             .then (response => {
                 if(response.ok) {
-                    console.log("Response", response);
+                    //console.log("Response", response.body);
                     //window.alert("SignIn successful");
                     return response;
                 }

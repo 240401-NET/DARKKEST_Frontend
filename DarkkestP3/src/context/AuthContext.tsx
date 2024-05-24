@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 interface AuthContextType {
     user: string | null,
     token: string | null,
+    authToken: string | null,
     loginUser: (username: string, password: string) => any
     register: (email: string, username: string, password: string) => any
     isLoggedIn: () => boolean;
@@ -20,8 +21,8 @@ interface Props {
 export const AuthProvider = ( {children} : Props ) => {
       const navigate = useNavigate();
       const [user , setUser] = useState<string | null>(null);
-      const [token , setToken] = useState<string | null>(null)
-      const [isAuthenticated , setIsAuthenticated] = useState<boolean>(false)
+      const [token , setToken] = useState<string | null>(null);
+      const [isAuthenticated , setIsAuthenticated] = useState<boolean>(false);
   
       useEffect(() => {
         const user = localStorage.getItem("user");
@@ -47,13 +48,18 @@ export const AuthProvider = ( {children} : Props ) => {
       const loginUser =  async (username: string, password: string) => {
         return await UserLogin(username, password)
           .then((res) => {
-            if(res){
-              localStorage.setItem("token", res.url + res.statusText)
+            if(res){                
               localStorage.setItem("user", username);
-              setToken(res.url + res.statusText);
               setUser(username!);
               return res;
             }
+          })
+          .then(res => res?.json())
+          .then(token =>{ 
+            setToken(token);
+            localStorage.setItem("token", token);
+            console.log(token);
+            return token;
           })
           .catch((error) => {
             console.error(error);
@@ -76,7 +82,7 @@ export const AuthProvider = ( {children} : Props ) => {
   
     return (
 
-        <AuthContext.Provider value = {{ loginUser, isLoggedIn, user, token, register, logoutUser }} >
+        <AuthContext.Provider value = {{ loginUser, isLoggedIn, user, token, register, logoutUser}} >
             {isAuthenticated ? children : null}
         </AuthContext.Provider>
     )
