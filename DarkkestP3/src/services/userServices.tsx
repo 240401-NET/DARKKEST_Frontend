@@ -2,13 +2,13 @@ import { BaseURL } from "../constants/Constant";
 
 export const UserLogin = (username: string, password: string ) => {
         
-    const loginURL =  BaseURL + "login";
+    const loginURL =  BaseURL + "login?useCookies=true&useSessionCookies=true";
         return fetch(loginURL, {
             method: "POST",
             mode: 'cors',
             credentials: "include",
             body: JSON.stringify({
-                    "username": username,
+                    "email": username,
                     "password": password,
                 }),
             headers: {
