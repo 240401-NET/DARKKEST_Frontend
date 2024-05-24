@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 interface AuthContextType {
     user: string | null,
     token: string | null,
-    authToken: string | null,
     loginUser: (username: string, password: string) => any
     register: (email: string, username: string, password: string) => any
     isLoggedIn: () => boolean;
