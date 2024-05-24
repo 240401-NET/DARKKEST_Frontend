@@ -22,6 +22,8 @@ function OpportunityPage() {
   const [userOpportunities, setUserOpportunities] = useState<Opportunity[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedOpportunityId, setSelectedOpportunityId] = useState<number | null>(null);
+
 
   useEffect(() => {
     const fetchUserOpportunities = async () => {
@@ -41,9 +43,9 @@ function OpportunityPage() {
   //   throw new Error("Function not implemented.");
   // }
 
-  const filteredOpportunities = userOpportunities.filter((userOpportunity) =>
-    userOpportunity.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredOpportunities = userOpportunities.filter((userOpportunity) =>
+  //   userOpportunity.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

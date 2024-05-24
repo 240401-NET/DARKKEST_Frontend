@@ -5,7 +5,6 @@ import { Routes, Route } from 'react-router-dom';
 import LandingPage from "./pages/LandingPage";
 import AuthPage from "./pages/AuthPage"; // New AuthPage component
 import NavBar from "./components/NavBar.tsx";
-import ApplicationPage from "./pages/ApplicationPage.tsx";
 import OrganizationPage from "./pages/OrganizationPage.tsx";
 
 import { useEffect, useState } from "react";
@@ -13,7 +12,6 @@ import { SelectedAuthForm, SelectedPage } from "./shared/types.ts";
 import Hero from "./pages/Hero.tsx";
 import Profile from "./pages/Profile.tsx";
 import OpportunityPage from "./pages/OpportunityPage.tsx";
-
 
 function App() {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(
@@ -64,10 +62,10 @@ function App() {
           <Route path="/organizations" element={<OrganizationPage />} />
           <Route path="/your-opportunities" element={<OpportunityPage />} />
           {/*
+          <Route path="/your-opportunities/application-page" element={<ApplicationPage />} />
           <Route path="/opp" element={<ViewOpportunitiesPage />} />
           <Route path="/pro" element={<ProfilePage />} />
           <Route path="/createopp" element={<CreateOpportunitiesPage />} />
-          <Route path="/app" element={<ApplicationPage />} />
           <Route path="/home" element={<HomePage />} /> */}
         </Routes>
       </AuthProvider>

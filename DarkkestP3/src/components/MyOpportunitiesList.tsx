@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DeleteOpp } from "../services/opportunityService";
-import { useEffect } from "react";
-import { GetUserOpps } from "../services/opportunityService";
+import ApplicationsModal from "./ApplicationsModal";
+import { GetAppsForOpportunity } from "../services/applicationService";
 
+//
 interface MyOpportunity {
   jobTitle: string;
   description: string;
@@ -15,8 +16,10 @@ type MyOpportunitiesListProps = {
   setUserOpportunities: (myOpportunities: MyOpportunity[]) => void;
 };
 
-const MyOpportunitiesList = ({userOpportunities,setUserOpportunities}: MyOpportunitiesListProps) => {
-
+const MyOpportunitiesList = ({ userOpportunities, setUserOpportunities }: MyOpportunitiesListProps) => {
+  const [selectedOpportunityId, setSelectedOpportunityId] = useState<number | null>(null);
+  const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
+  const [applicationsState, setApplicationsState] = useState<any[]>([]);
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -37,8 +40,34 @@ const MyOpportunitiesList = ({userOpportunities,setUserOpportunities}: MyOpportu
     }
   };
 
- 
+  useEffect(()=>{
+    const fetchApplications = async () => {
+      if(selectedOpportunityId === null) {
+        setApplicationsState([]);
+        return;
+      }
+      try {
+          const res = await GetAppsForOpportunity(selectedOpportunityId);
+          const data = await res;
+          setApplicationsState(data);
+      } catch (error) {
+          console.error("Failed to fetch applications:", error);
+      }
+    };
+    fetchApplications()
+  }, [selectedOpportunityId])
 
+  const handleCardClick = (opportunityId: number) => {
+    setSelectedOpportunityId(opportunityId);
+    setIsApplicationModalOpen(true);
+    console.log(opportunityId)
+  }
+
+  const onAppClose = ()=>{
+    setIsApplicationModalOpen(false);
+    setSelectedOpportunityId(null);
+  }
+  
   return (
     <div className="space-y-4">
       {userOpportunities.map((opportunity, index) => (
@@ -49,15 +78,28 @@ const MyOpportunitiesList = ({userOpportunities,setUserOpportunities}: MyOpportu
           <p className="text-gray-700">
             Description: {opportunity.description}
           </p>
-          <div id="MOBDiv">
+          <div className="flex justify-between items-center mb-4">
+            <button className="bg-white text-black font-semibold py-2 px-4 rounded border border-primary-green hover:bg-primary-green hover:text-white transition duration-200"
+              onClick={()=>handleCardClick(opportunity.oppId)}>
+              Applications
+            </button>
             <button
               data-value={opportunity.oppId}
               onClick={handleClick}
-              id="MOB"
-            >
+              className="bg-white text-black font-semibold py-2 px-4 rounded border border-primary-green hover:bg-primary-green hover:text-white transition duration-200">
+
               Delete
             </button>
           </div>
+
+          {/* Modal for Applications */}
+          <ApplicationsModal
+            isAppOpen={isApplicationModalOpen}
+            onAppClose={onAppClose}
+            applicationsState = {applicationsState}
+
+            // oppId={selectedOpportunityId}
+          />
         </div>
       ))}
     </div>

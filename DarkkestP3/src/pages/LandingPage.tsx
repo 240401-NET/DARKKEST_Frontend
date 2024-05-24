@@ -76,7 +76,7 @@ const LandingPage: React.FC = () => {
         {/* Left Sidebar */}
         <LeftSideBar />
         {/* Main Content */}
-        <div className="flex-2 bg-white w-2/4 pt-20 p-4">
+        <div className="overflow-y-auto flex-2 bg-white w-2/4 pt-20 p-4">
           <div className="flex justify-between items-center mb-4">
             <h1
               className="text-2xl font-semibold leading-tight"
