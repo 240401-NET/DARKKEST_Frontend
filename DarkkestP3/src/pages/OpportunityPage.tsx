@@ -36,6 +36,7 @@ function OpportunityPage() {
     fetchUserOpportunities();
   }, []);
 
+
   // function setIsModalOpen(arg0: boolean): void {
   //   throw new Error("Function not implemented.");
   // }
@@ -75,7 +76,7 @@ function OpportunityPage() {
     }
   };
 
-  useEffect(() => {}, [userOpportunities]);
+  // useEffect(() => {}, [userOpportunities]);
 
   return (
     <section className="min-h-screen flex flex-col bg-secondary-white pt-10 md:h-full">
@@ -113,7 +114,7 @@ function OpportunityPage() {
           <div className="mt-8 text-left px-8">
             <div className="mt-8 flex flex-col space-x-4 justify-center">
               {/* Display OpportunitiesList */}
-              <MyOpportunitiesList opportunities={filteredOpportunities} />
+              <MyOpportunitiesList />
             </div>
           </div>
         </div>
