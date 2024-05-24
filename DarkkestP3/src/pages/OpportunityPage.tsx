@@ -22,6 +22,8 @@ function OpportunityPage() {
   const [userOpportunities, setUserOpportunities] = useState<Opportunity[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedOpportunityId, setSelectedOpportunityId] = useState<number | null>(null);
+
 
   useEffect(() => {
     const fetchUserOpportunities = async () => {

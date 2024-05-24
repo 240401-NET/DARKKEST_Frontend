@@ -35,7 +35,7 @@ export function ApplicationListComponent(props: propsInterface){
     }
     return (
         <div className="space-y-4">
-            <div className="border rounded p-4 shadow-sm">
+            <div className="mt-8 text-left px-8 border rounded p-4 shadow-sm">
                 {status}
                 <p className="text-gray-700">
                     History: {props.data.history}

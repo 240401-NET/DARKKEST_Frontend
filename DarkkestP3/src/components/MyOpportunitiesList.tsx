@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DeleteOpp } from "../services/opportunityService";
 import ApplicationsModal from "./ApplicationsModal";
+import { GetAppsForOpportunity } from "../services/applicationService";
 
+//
 interface MyOpportunity {
   jobTitle: string;
   description: string;
@@ -15,7 +17,9 @@ type MyOpportunitiesListProps = {
 };
 
 const MyOpportunitiesList = ({ userOpportunities, setUserOpportunities }: MyOpportunitiesListProps) => {
+  const [selectedOpportunityId, setSelectedOpportunityId] = useState<number | null>(null);
   const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
+  const [applicationsState, setApplicationsState] = useState<any[]>([]);
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -36,12 +40,37 @@ const MyOpportunitiesList = ({ userOpportunities, setUserOpportunities }: MyOppo
     }
   };
 
+  useEffect(()=>{
+    const fetchApplications = async () => {
+      if(selectedOpportunityId === null) {
+        setApplicationsState([]);
+        return;
+      }
+      try {
+          const res = await GetAppsForOpportunity(selectedOpportunityId);
+          const data = await res;
+          setApplicationsState(data);
+      } catch (error) {
+          console.error("Failed to fetch applications:", error);
+      }
+    };
+    fetchApplications()
+  }, [selectedOpportunityId])
 
+  const handleCardClick = (opportunityId: number) => {
+    setSelectedOpportunityId(opportunityId);
+    setIsApplicationModalOpen(true);
+    console.log(opportunityId)
+  }
 
+  const onAppClose = ()=>{
+    setIsApplicationModalOpen(false);
+    setSelectedOpportunityId(null);
+  }
+  
   return (
     <div className="space-y-4">
       {userOpportunities.map((opportunity, index) => (
-        // console.log(opportunity.oppId + "------------"),
         <div key={index} className="border rounded p-4 shadow-sm">
           <h2 className="text-xl font-semibold mb-2">
             Job Title: {opportunity.jobTitle}
@@ -51,7 +80,7 @@ const MyOpportunitiesList = ({ userOpportunities, setUserOpportunities }: MyOppo
           </p>
           <div className="flex justify-between items-center mb-4">
             <button className="bg-white text-black font-semibold py-2 px-4 rounded border border-primary-green hover:bg-primary-green hover:text-white transition duration-200"
-              onClick={() => setIsApplicationModalOpen(true)}>
+              onClick={()=>handleCardClick(opportunity.oppId)}>
               Applications
             </button>
             <button
@@ -66,8 +95,10 @@ const MyOpportunitiesList = ({ userOpportunities, setUserOpportunities }: MyOppo
           {/* Modal for Applications */}
           <ApplicationsModal
             isAppOpen={isApplicationModalOpen}
-            onAppClose={() => setIsApplicationModalOpen(false)}
-            oppId={opportunity.oppId}
+            onAppClose={onAppClose}
+            applicationsState = {applicationsState}
+
+            // oppId={selectedOpportunityId}
           />
         </div>
       ))}
