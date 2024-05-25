@@ -56,13 +56,6 @@ export const AuthProvider = ({ children }: Props) => {
           return res;
         }
       })
-      .then(res => res?.json())
-      .then(token =>{ 
-        setToken(token);
-        localStorage.setItem("token", token);
-        console.log(token);
-        return token;
-      })
       .catch((error) => {
         console.error(error);
       })

@@ -60,6 +60,7 @@ export const updateUserProfile = async (
     if (response.ok) {
       const result = await response.json();
       console.log('Profile updated successfully:', result);
+      alert('Updated Profile Saved');  // Show success message
       return result;
     } else {
       console.error(
